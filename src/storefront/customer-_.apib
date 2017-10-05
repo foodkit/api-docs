@@ -1,8 +1,97 @@
-* Customer
-    ~ GET    /api/v1/storefront/customers/me
-    ~ PATCH  /api/v2/storefront/customers/me
-    ~ POST   /api/v1/storefront/customers/me/
-    ~ DELETE /api/v1/storefront/customers/me/card
-    ~ POST   /api/v1/storefront/customers/exists
-    ~ POST   /api/v3/storefront/password-resets
-     ~ POST   /api/v3/storefront/customers/me/push-token
+### Customer [/api/v1/storefront/customers/me]
+
+#### Get details [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Update details [PATCH /api/v2/stoefront/customers/me]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Update push token [PATCH /api/v3/storefront/customers/me/push-token]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+### Password reset [/api/v3/storefront/password-resets]
+
+#### Send password reset email [POST]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Create new customer [POST /api/v1/storefront/customers]
+
++ Request (application/json)
+
+        {
+            "name": "Corey Mcmahon",
+            "email": "corey@ginja.co.th",
+            "phone_number": "09428971234",
+            "password": "password1"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 24717,
+            "profile_image_src": null,
+            "email": "corey@ginja.co.th",
+            "name": "Corey Mcmahon",
+            "phone_number": "09428971234",
+            "idp": "password",
+            "addresses": [],
+            "payment_options": null,
+            "default_locale": "en",
+            "user_id": 21788,
+            "customer_facebook_account_id": null,
+            "customer_google_account_id": null
+        }
+
+#### Check customer exists [POST /api/v1/storefront/customers/exists]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+

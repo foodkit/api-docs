@@ -1,5 +1,127 @@
-     ~ GET    /api/v2/storefront/customers/me/addresses
-     ~ POST   /api/v1/storefront/customers/me/addresses
-     ~ GET    /api/v1/storefront/customers/me/addresses/{id}
-     ~ PATCH  /api/v1/storefront/customers/me/addresses/{id}
-     ~ DELETE /api/v1/storefront/customers/me/addresses/{id}
+### Customer's addresses [/api/v1/storefront/customers/me/addresses]
+
+#### List all addresses [GET /api/v2/storefront/customers/me/addresses]
+
+@todo: there is also a v1 namespaced endpoint for retrieving this. What is the difference?
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "address_id": 9909,
+                    "type": "others",
+                    "building_name": "SSP Building",
+                    "room_number": "0",
+                    "floor_number": "22",
+                    "address1": "Ekkamai rd",
+                    "address2": null,
+                    "district": "",
+                    "city": "Bangkok",
+                    "postcode": null,
+                    "directions": "Call when you arrive in the foyer",
+                    "address_label": null,
+                    "latitude": "13.720711000000",
+                    "longitude": "100.584267000000",
+                    "area_id": null,
+                    "geolocation_source": null,
+                    "formatted": "SSP Building\nFloor #22\nEkkamai rd\nBangkok"
+                }
+            ]
+        }
+
+#### Get address details [GET /api/v1/storefront/customers/me/address/{address_id}]
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+                "address_id": 9909,
+                "type": "others",
+                "building_name": "SSP Building",
+                "room_number": "0",
+                "floor_number": "22",
+                "address1": "Ekkamai rd",
+                "address2": null,
+                "district": "",
+                "city": "Bangkok",
+                "postcode": null,
+                "directions": "Call when you arrive in the foyer",
+                "address_label": null,
+                "latitude": "13.720711000000",
+                "longitude": "100.584267000000",
+                "area_id": null,
+                "geolocation_source": null,
+                "formatted": "SSP Building\nFloor #22\nEkkamai rd\nBangkok"
+            }
+        }
+
+#### Add a new address [POST]
+
++ Request (application/json)
+
+        {
+            "latitude": 13.720711,
+            "longitude": 100.584267,
+            "building_name": "SSP Building",
+            "district": "",
+            "address_id": null,
+            "floor_number": "22",
+            "room_number": "0",
+            "address1": "Ekkamai rd",
+            "directions": "Call when you arrive in the foyer",
+            "type": "others"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+                "address_id": 9909,
+                "type": "others",
+                "building_name": "SSP Building",
+                "room_number": "0",
+                "floor_number": "22",
+                "address1": "Ekkamai rd",
+                "address2": null,
+                "district": "",
+                "city": null,
+                "postcode": null,
+                "directions": "Call when you arrive in the foyer",
+                "address_label": null,
+                "latitude": 13.720711,
+                "longitude": 100.584267,
+                "area_id": null,
+                "geolocation_source": null,
+                "formatted": "SSP Building\nFloor #22\nEkkamai rd\n"
+            }
+        }
+
+#### Update address details [PATCH /api/v1/storefront/customers/me/address/{address_id}]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Remove an address [DELETE /api/v1/storefront/customers/me/address/{address_id}]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+

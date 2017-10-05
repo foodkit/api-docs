@@ -1,2 +1,41 @@
-     ~ POST   /api/v1/storefront/social-signins/facebook
-     ~ POST   /api/v1/storefront/social-signins/google
+### Social signins [/api/v1/storefront/social-signins]
+
+#### Facebook [POST /api/v1/storefront/social-signins/facebook]
+
++ Request (application/json)
+
+        {
+            "code": "tssddrincididuntutlabadfb...lasdfisfdtasfanfsiestlabor...",
+            "redirect":"https://www.your-resto.com/auth/facebook/callback"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+                "access_token": "vndQdRmxdCkvhnxazfQtWxChVYpIBOaBnZvwYEgoDd...",
+                "token_type": "bearer",
+                "expires_in": 5183479
+            }
+        }
+
+#### Google [POST /api/v1/storefront/social-signins/google]
+
++ Request (application/json)
+
+        {
+            "code": "MBFxSIBLlyJsSHWcsVTmuEmhFfwIsnqoUtKIDphUHjPWSlgtyaSLK",
+            "redirect": "https://www.your-resto.com/auth/google/callback"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+                "access_token": "abcd.qZypDgEOlUfaORpweNBrhcgIaRiCSafMliRkc...",
+                "expires_in": 3599,
+                "id_token": "myvbnbcbLPGuqqMLOoHCWloRqGUMskhEhbXjNohTTpOCmf...",
+                "token_type": "Bearer"
+            }
+        }
+

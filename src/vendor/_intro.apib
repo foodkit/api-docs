@@ -1,2 +1,326 @@
 ## Group Vendor
 
+### Vendor [/api/v1/vendor]
+
+#### Get details [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Update [PATCH /api/v1/vendor/{vendor_id}]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+### Orders [/api/v3/vendor/{vendor_id}/orders]
+
+#### Current orders [GET /api/v3/vendor/{vendor_id}/orders/current]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Historical orders [GET /api/v3/vendors/{vendor_id}/orders/completed]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Get details [GET /api/v1/vendor/{vendor_id}/orders/{order_id}]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Update details [PATCH /api/v1/vendor/{vendor_id}/orders/{order_id}]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Cancel order [DELETE /api/v1/vendor/orders/{order_id}]
+
+@todo: deprecate?
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+### Products [/api/v1/vendor/products]
+
+#### List all [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Create product [POST]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Update product [PATCH /api/v1/vendor/products/{product_id}]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Delete product [DELETE /api/v1/vendor/products/{product_id}]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+### Categories [/api/v1/vendor/categories]
+
+#### List all [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Create category [POST]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Update category [PATCH /api/v1/vendor/categories/{category_id}]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Delete category [DELETE /api/v1/vendor/categories/{category_id}]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+### Cancellations [/api/v1/vendor/cancellations]
+
+#### Get cancellation reasons [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+### Opening hours [/api/v3/vendor/{vendor_id}/opening-hours]
+
+#### List [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Create [POST]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Remove [DELETE /api/v3/vendor/{vendor_id}/opening-hours/{slot_id}]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+### Products [/api/v3/vendor/{vendor_id}/products]
+
+#### List [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Get single [GET /api/v3/vendor/{vendor_id}/products/{product_id}]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Update single [PATCH /api/v3/vendor/{vendor_id}/products/{product_id}]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Get vendor extras [GET /api/v3/vendor/{vendor_id}/extras]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Get product extras [GET /api/v3/vendor/{vendor_id}/products/{product_id}/extras]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Enable/disable extra item [PATCH /api/v3/vendor/{vendor_id}/extras/{extra_id}/items/{item_id}]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+### Vendor user [/api/v3/vendor/user]
+
+#### Details [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Update info [PATCH]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Update password [POST /api/v3/vendor/user/password]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+#### Update device token [POST /api/v3/vendor/user/device-token]
+
++ Request (application/json)
+
+        {
+            "data": "tba"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": "tba"
+        }
+
+
+
