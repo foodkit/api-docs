@@ -1,0 +1,31 @@
+FORMAT: 1A
+HOST: https://api.foodkit.io
+
+# Foodkit API
+
+* Scoped; storefront, vendor, support
+* Versioned; watch for the V1/V2/V3
+
+## Authentication [/api/v1/oauth/access_token]
+
+* API uses Oauth-based scoped tokens.
+
+### Get a new access token [POST]
+
+* Guest vs customer
+* Signup process
+
++ Request (application/json)
+
+        {
+            "client_id": "",
+            "client_secret": ""
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+                "access_token": ""
+            }
+        }
