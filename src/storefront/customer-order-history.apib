@@ -2,28 +2,176 @@
 
 #### List all orders [GET]
 
-+ Request (application/json)
-
-        {
-            "data": "tba"
-        }
-
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+            "data": {
+                [
+                    {
+                        "id": 19550,
+                        "vendor_order_id": 142,
+                        "vendor_id": 207,
+                        "vendor_name": "The Coffee Club (Ekamai)",
+                        "vendor_short_name": "Ekamai",
+                        "vendor_phone": "0922486901",
+                        "vendor_logo_img_src": "http://res.cloudinary.com/tumtum/image/upload/c_fill,h_128,w_128/v1505465008/vendors/the-coffee-club/tcc-logo_200x200.jpg",
+                        "reference": "TC7-170900018",
+                        "status": "unverified",
+                        "subtotal": 500,
+                        "excluded_taxes": 0,
+                        "total": 500,
+                        "rounding": 0,
+                        "discount_percentage": 0,
+                        "is_updated": false,
+                        "is_updated_requiring_notification": false,
+                        "service_fee": 0,
+                        "service_fee_percentage": 0,
+                        "delivery_fee": 0,
+                        "payment_type": "cod",
+                        "vat_rate": 7,
+                        "vat_total": 32.71,
+                        "taxable_amount": 0,
+                        "vat": 32.71,
+                        "discount": 0,
+                        "payment_processing_fee": 0,
+                        "payment_processing_fee_fixed": 0,
+                        "payment_processing_fee_percentage": 0,
+                        "payment_fee": 0,
+                        "paypal_approval_link": null,
+                        "channel": "ios",
+                        "is_realtime": true,
+                        "scheduled_date": null,
+                        "scheduled_time": null,
+                        "name": "COREY J MCMAHON",
+                        "email": "corey+tester99@ginja.co.th",
+                        "phone_number": "0942897111",
+                        "comments": null,
+                        "type": null,
+                        "address_label": null,
+                        "address_name": null,
+                        "room_number": null,
+                        "floor_number": null,
+                        "address1": null,
+                        "address2": null,
+                        "district": null,
+                        "city": null,
+                        "postcode": null,
+                        "latitude": null,
+                        "longitude": null,
+                        "directions": null,
+                        "coupon_code": null,
+                        "coupon_discount": null,
+                        "orderer_referral_coupon": "COREY0004",
+                        "products": [
+                            {
+                                "id": 14557,
+                                "quantity": 4,
+                                "extra_items": [
+                                    {
+                                        "id": 6631,
+                                    }
+                                ]
+                            }
+                        ],
+                        "order_type": "pickup",
+                        "ordered_at": "2017-09-30 11:16:50",
+                        "pending_at": null,
+                        "vendor_accepted_at": null,
+                        "driver_accepted_at": null,
+                        "dispatched_at": null,
+                        "completed_at": null,
+                        "vendor_cancelled_at": null,
+                        "ginja_cancelled_at": null,
+                        "lalamove_help_buy": false,
+                        "manual_price_adjustment": null,
+                        "manual_price_adjustment_reason": null
+                    }
+                ]
+            }
         }
 
 #### Retrieve a single order [GET /api/v1/storefront/customers/me/orders/{order_id}]
 
-+ Request (application/json)
-
-        {
-            "data": "tba"
-        }
-
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+            "data": {
+                "id": 19550,
+                "vendor_order_id": 142,
+                "vendor_id": 207,
+                "vendor_name": "The Coffee Club (Ekamai)",
+                "vendor_short_name": "Ekamai",
+                "vendor_phone": "0922486901",
+                "vendor_logo_img_src": "http://res.cloudinary.com/tumtum/image/upload/c_fill,h_128,w_128/v1505465008/vendors/the-coffee-club/tcc-logo_200x200.jpg",
+                "reference": "TC7-170900018",
+                "status": "unverified",
+                "subtotal": 500,
+                "excluded_taxes": 0,
+                "total": 500,
+                "rounding": 0,
+                "discount_percentage": 0,
+                "is_updated": false,
+                "is_updated_requiring_notification": false,
+                "service_fee": 0,
+                "service_fee_percentage": 0,
+                "delivery_fee": 0,
+                "payment_type": "cod",
+                "vat_rate": 7,
+                "vat_total": 32.71,
+                "taxable_amount": 0,
+                "vat": 32.71,
+                "discount": 0,
+                "payment_processing_fee": 0,
+                "payment_processing_fee_fixed": 0,
+                "payment_processing_fee_percentage": 0,
+                "payment_fee": 0,
+                "paypal_approval_link": null,
+                "channel": "ios",
+                "is_realtime": true,
+                "scheduled_date": null,
+                "scheduled_time": null,
+                "name": "COREY J MCMAHON",
+                "email": "corey+tester99@ginja.co.th",
+                "phone_number": "0942897111",
+                "comments": null,
+                "type": null,
+                "address_label": null,
+                "address_name": null,
+                "room_number": null,
+                "floor_number": null,
+                "address1": null,
+                "address2": null,
+                "district": null,
+                "city": null,
+                "postcode": null,
+                "latitude": null,
+                "longitude": null,
+                "directions": null,
+                "coupon_code": null,
+                "coupon_discount": null,
+                "orderer_referral_coupon": "COREY0004",
+                "products": [
+                    {
+                        "id": 14557,
+                        "quantity": 4,
+                        "extra_items": [
+                            {
+                                "id": 6631,
+                            }
+                        ]
+                    }
+                ],
+                "order_type": "pickup",
+                "ordered_at": "2017-09-30 11:16:50",
+                "pending_at": null,
+                "vendor_accepted_at": null,
+                "driver_accepted_at": null,
+                "dispatched_at": null,
+                "completed_at": null,
+                "vendor_cancelled_at": null,
+                "ginja_cancelled_at": null,
+                "lalamove_help_buy": false,
+                "manual_price_adjustment": null,
+                "manual_price_adjustment_reason": null
+            }
         }

@@ -1,9 +1,16 @@
 ### Customer's addresses [/api/v1/storefront/customers/me/addresses]
 
-#### List all addresses [GET /api/v2/storefront/customers/me/addresses]
+#### List all addresses, if lat and lng provided, it will attach the distance from that location on each address [GET /api/v2/storefront/customers/me/addresses]
 
 @todo: there is also a v1 namespaced endpoint for retrieving this. What is the difference?
 
++ Request (application/json)
+
+        {
+            "lat": "13.730711000000",
+            "lng": "100.594267000000"
+        }
+ 
 + Response 200 (application/json)
 
         {
@@ -25,7 +32,8 @@
                     "longitude": "100.584267000000",
                     "area_id": null,
                     "geolocation_source": null,
-                    "formatted": "SSP Building\nFloor #22\nEkkamai rd\nBangkok"
+                    "formatted": "SSP Building\nFloor #22\nEkkamai rd\nBangkok",
+                    "distance": 20.23
                 }
             ]
         }
@@ -102,26 +110,57 @@
 + Request (application/json)
 
         {
-            "data": "tba"
+            "latitude": 13.720711,
+            "longitude": 100.584267,
+            "building_name": "SSP Building",
+            "district": "Wathanna",
+            "floor_number": "22",
+            "room_number": "0",
+            "address1": "Ekkamai rd",
+            "directions": "Call when you arrive in the foyer",
+            "type": "others"
         }
 
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+            "address_id": 9909,
+            "type": "others",
+            "building_name": "SSP Building",
+            "room_number": "0",
+            "floor_number": "22",
+            "address1": "Ekkamai rd",
+            "address2": null,
+            "district": "Wathanna",
+            "city": null,
+            "postcode": null,
+            "directions": "Call when you arrive in the foyer",
+            "address_label": null,
+            "latitude": 13.720711,
+            "longitude": 100.584267,
+            "area_id": null,
+            "geolocation_source": null,
+            "formatted": "SSP Building\nFloor #22\nEkkamai rd\n"
         }
 
 #### Remove an address [DELETE /api/v1/storefront/customers/me/address/{address_id}]
 
-+ Request (application/json)
-
-        {
-            "data": "tba"
-        }
-
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+            "data": {
+                "id": 24717,
+                "profile_image_src": null,
+                "email": "corey@ginja.co.th",
+                "name": "Corey Mcmahon",
+                "phone_number": "09428971234",
+                "idp": "password",
+                "addresses": [],
+                "payment_options": null,
+                "default_locale": "en",
+                "user_id": 21788,
+                "customer_facebook_account_id": null,
+                "customer_google_account_id": null
+            }
         }
 

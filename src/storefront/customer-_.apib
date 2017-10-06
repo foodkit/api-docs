@@ -5,7 +5,20 @@
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+            "data": {
+                "id": 24717,
+                "profile_image_src": null,
+                "email": "corey@ginja.co.th",
+                "name": "Corey Mcmahon",
+                "phone_number": "09428971234",
+                "idp": "password",
+                "addresses": [],
+                "payment_options": null,
+                "default_locale": "en",
+                "user_id": 21788,
+                "customer_facebook_account_id": null,
+                "customer_google_account_id": null
+            }
         }
 
 #### Update details [PATCH /api/v2/stoefront/customers/me]
@@ -13,13 +26,28 @@
 + Request (application/json)
 
         {
-            "data": "tba"
+            "name": "Corey Mcmahon",
+            "email": "corey@ginja.co.th",
+            "phone_number": "09428971234"
         }
 
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+            "data": {
+                "id": 24717,
+                "profile_image_src": null,
+                "email": "corey@ginja.co.th",
+                "name": "Corey Mcmahon",
+                "phone_number": "09428971234",
+                "idp": "password",
+                "addresses": [],
+                "payment_options": null,
+                "default_locale": "en",
+                "user_id": 21788,
+                "customer_facebook_account_id": null,
+                "customer_google_account_id": null
+            }
         }
 
 #### Update push token [PATCH /api/v3/storefront/customers/me/push-token]
@@ -85,13 +113,16 @@
 + Request (application/json)
 
         {
-            "data": "tba"
+            "email": "corey@ginja.co.th",
+            "phone_number": "09428971234"
         }
 
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+            "data": {
+                "exists": true
+            }
         }
 
 
