@@ -1,28 +1,33 @@
 ### Brands [/api/v3/storefront/brands]
 
+"Brands" are used to group restaurant branches. In a typical example, a brand might be "Acme Corp", which would contain a number of individual branches at different locations.
+
 #### List all brands [GET]
+
+An access token is typically associated with a single "brand". This means that the access token permits the bearer to interact with the products and branches within that brand, but will return unauthorized errors if it's used outside of that context.
+
+This endpoint will typically be used when you want to establish the context of the user so you can bootstrap other foundational elements of your application or website, such as social signin credentials and credit card processing ability.
 
 + Response 200 (application/json)
 
         {
             "data": {
-            	"credit_card_gateway": {
-            		"name": "2C2P"
-            	}
-            	"credit_card_gateway_public_key": null
-            	"facebook": {
-            		"application_id": "999999999999999"
-					"redirect_uri": "https://your-restaurant.com/auth/facebook/callback"
-				}
-				"google": {
-					"android_client_id": "549404802555-3Hccctn8cZa2ht4Q3CbHcdTGaGgzZg8E.apps.googleusercontent.com"
-					"ios_client_id": "549404802555-ARVjuHwTPyPJyUcwyPMQ4tbDrPZrGNNSs.apps.googleusercontent.com"
-					"redirect_uri": "https://delivery.your-restaurant.com/auth/google/callback"
-					"web_client_id": "549404802555-FUrAMJ8YDBLvxGqCUuy2Pghhc7eU4UWz.apps.googleusercontent.com"
-				}
-				"google_browser_key": "p9Ss4hghu2EeNjs8ggUZF3uWZwBySGf6sJnkDfu"
-				"id": 9
-				"multistore_parent_id": 999
+                "credit_card_gateway": {
+                    "name": "2C2P"
+                }
+                "credit_card_gateway_public_key": null
+                "facebook": {
+                    "application_id": "999999999999999",
+                    "redirect_uri": "https://your-restaurant.com/auth/facebook/callback"
+                }
+                "google": {
+                    "android_client_id": "67813467867-MFDzXQVqqpDeCDe65Bsr.apps.googleusercontent.com",
+                    "ios_client_id": "243789234798-U5dOS4UvWZtKHfqyf7eb.apps.googleusercontent.com",
+                    "redirect_uri": "https://delivery.your-restaurant.com/auth/google/callback",
+                    "web_client_id": "234324234223-3LwVCda0XOUj2jwwBB.apps.googleusercontent.com"
+                }
+                "google_browser_key": "fOsEavJUByyfk9uT7zly7IffFnuevJlC0XYIsnyJP",
+                "id": 9,
+                "multistore_parent_id": 999
             }
         }
-

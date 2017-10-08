@@ -1,6 +1,12 @@
 ### Coupon codes [/api/v3/storefront/vendors/{vendor_id}/validate]
 
+The Foodkit platform supports and extensive range of coupon codes which can be used to apply different discounts and incentives for consumers on a targeted or generic basis.
+
 #### Validate coupon code [GET /api/v3/storefront/vendors/{vendor_id}/validate{?code,phone_number}]
+
+Before applying a coupon code to an order, we'll typically want to check its validity.
+
+Note that it's desirable to provide the phone number of the user (if available), as some coupons are limited on a per-phone number basis. It isn't necessary as the quotation and order creation endpoints will also check for this, but it provides a better user experience to check earlier.
 
 + Parameters
     + code: FREEFOOD (string)
@@ -34,4 +40,3 @@
                 "vendor": null
             }
         }
-

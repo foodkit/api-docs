@@ -1,6 +1,12 @@
 ### Customer [/api/v1/storefront/customers/me]
 
+A foundational concept in any ecommerce system is that of the "customer". Foodkit's customer record enables developers to track important information about their users and support typical use-cases such as sign-up (social media account and/or password based), phone-number and email address management and the addition/removal of payment options.
+
+Instead of explicitly providing an ID in the URL, Foodkit uses the "me" URL fragment to infer the current logged-in users' context (based on the access token used to make the request).
+
 #### Get details [GET]
+
+This call simply retrieves the current state of the customer's record. Note that the `addresses` and `payment_options` relationships will be automatically hydrated (if populated).
 
 + Response 200 (application/json)
 
@@ -12,7 +18,7 @@
                 "name": "Corey Mcmahon",
                 "phone_number": "09428971234",
                 "idp": "password",
-                "addresses": [],
+                "addresses": null,
                 "payment_options": null,
                 "default_locale": "en",
                 "user_id": 21788,
@@ -21,7 +27,9 @@
             }
         }
 
-#### Update details [PATCH /api/v2/stoefront/customers/me]
+#### Update details [PATCH /api/v2/storefront/customers/me]
+
+This API call enables the user to update their personal information. At the moment only `phone_number` and `email` are supported.
 
 + Request (application/json)
 
@@ -52,6 +60,10 @@
 
 #### Update push token [PATCH /api/v3/storefront/customers/me/push-token]
 
+This endpoint is important for *mobile applications*. It enables mobile developers to associate a push notification token with a customer record so that they can send real-time push notifications for order updates and marketing purposes.
+
+Note that this endpoint will infer the device type (iOS, Android) based on the format of the token.
+
 + Request (application/json)
 
         {
@@ -65,6 +77,8 @@
         }
 
 ### Password reset [/api/v3/storefront/password-resets]
+
+Occasionally your users may forget their passwords. This endpoint enables you to trigger password resets. This will send an email containing a unique link to the user. Once the user clicks on this link, they'll be prompted to reconfirm their email address and to choose a new password. Note that although the page they land on _will_ match the look and feel of the relevant _brand_, the domain it's hosted on *will* be the same as the API server itself. If this is a concern please contact your account director to organize an alternative.
 
 #### Send password reset email [POST]
 
@@ -81,6 +95,8 @@
         }
 
 #### Create new customer [POST /api/v1/storefront/customers]
+
+When a new user joins your application, they'll need to create an account before checking out.
 
 + Request (application/json)
 
@@ -110,6 +126,8 @@
 
 #### Check customer exists [POST /api/v1/storefront/customers/exists]
 
+Before a customer registers, you'll want to check to make sure they haven't already created an account with the supplied email address or phone number (both of these MUST be unique). You can do this using the following endpoint.
+
 + Request (application/json)
 
         {
@@ -124,5 +142,3 @@
                 "exists": true
             }
         }
-
-

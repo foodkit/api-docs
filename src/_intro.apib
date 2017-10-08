@@ -1,31 +1,63 @@
 FORMAT: 1A
-HOST: https://api.foodkit.io
+HOST: https://acmecorp.foodkit.io
 
 # Foodkit API
 
-* Scoped; storefront, vendor, support
-* Versioned; watch for the V1/V2/V3
+The Foodkit API provides developers with a powerful and flexible platform for building ecommerce applications for the F&B industry. It's a RESTful JSON-based service, with access control managed using OAuth-style tokens.
+
+Some other important things to note:
+
+* The API uses OAuth-based access tokens to authenticate and authorize users. As a result, all API calls need a "Authorization" header which should include the content "Bearer {token}", where `token` contains the relevant access token.
+* It is *scoped*, so depending on the scope of the access token you've generated, you will/won't be able to access certain endpoints. More on this later.
+* It is *versioned* with a `vX` parameter in the URL, so make sure you're accessing the right version number for the desired endpoint or you'll get unexpected results. We're working on making this _much_ easier with the v4 release which will be available Q1/Q2 2018.
+* The API supports Internationalization. Simply provide a "Accepts-language" header with the desired language code, and the API will respond with the relevant content (if available).
 
 ## Authentication [/api/v1/oauth/access_token]
 
-* API uses Oauth-based scoped tokens.
+Before you can do anything, you'll need to fetch an access token. For the storefront routes, there are two scopes:
+
+* Guest scope: as the name implies, this is for unauthenticated users. A guest token enables the user to READ inventory and branch information, but it can't be used to edit customer information or create orders.
+* Customer scope: the user can authenticate against an existing user in the database (or create a new account) to retrieve this token scope. It will enable the token owner to do everything a guest token can, with the added ability to create orders and manage customer information.
 
 ### Get a new access token [POST]
 
-* Guest vs customer
-* Signup process
+First an example of a guest token request. Typically you'll want to fetch a guest token where you want to support a "browse" feature for unauthenticated users without allowing them to create transactions or view/edit any customer specific information. You can simply request this using the payload below (no user-specific credentials required):
 
 + Request (application/json)
 
         {
-            "client_id": "",
-            "client_secret": ""
+            "grant_type": "guest",
+            "client_id": "store-front-ios-acme",
+            "client_secret": "kYPg3XEc94vx065kf4CUZoYJYeQ9NFq2",
+            "scope": "brand-guest"
         }
 
 + Response 200 (application/json)
 
         {
-            "data": {
-                "access_token": ""
-            }
+            "access_token":"O2144OIltvzisLlM857720LOoaDwigLJKjiapPUjLS",
+            "token_type":"Bearer",
+            "expires_in":86400
+        }
+
+Now an example of a request for a registered user. In this example, the user authenticates with a username (phone number) and password, but other authentication mechanisms are also supported (e.g: Facebook and Google).
+
++ Request (application/json)
+
+        {
+            "client_id": "store-front-ios-dev"
+            "client_secret": "rtvXfFZAaZK4CFUzlXdNmM4iG3FGrkbq"
+            "grant_type": "customer"
+            "idp": "password"
+            "password": "password1"
+            "scope": "brand-customer"
+            "username": "09428971560"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "access_token": "z5ezEwXLUp9k6HsdS5Nre59fBC0A8nnqdYP4pwLXft",
+            "token_type": "Bearer",
+            "expires_in": 86400
         }
