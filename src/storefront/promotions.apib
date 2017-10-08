@@ -5,7 +5,25 @@
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+            "data": [
+            	{
+            		"call_to_action": 1
+					"coupon_code_id": null
+					"created_by_id": 2138
+					"description": "Enjoy buy 1 get 1 free main courses from top restaurants like Wagyu, La Paloma, French Window, JASPAS and more in the Food & Drink category, or browse yoga, Pilates, manicures and massages under Beauty & Fitness. There’s tons more to choose from in Attractions & Leisure, Retail & Services and Hotels Worldwide. The offers are always changing, so sort by New for the latest and greatest."
+					"id": 12
+					"image": "https://image-url"
+					"is_enabled": 1
+					"max_usages": 1
+					"promotion_type": "Message"
+					"ranking": 5
+					"short_description": "On every favorite dish"
+					"title": "Buy 1 get 1"
+					"usages": 0
+					"valid_from": "2017-10-06 05:53:00"
+					"valid_to": "2017-12-09 05:53:00"
+            	}
+            ]
         }
 
 #### Get single promo [GET /api/v3/storefront/vendors/{vendor_id}/promotions/{promotion_id}]
@@ -13,6 +31,22 @@
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+            "data": {
+            	"call_to_action": 1
+				"coupon_code_id": null
+				"created_by_id": 2138
+				"description": "Enjoy buy 1 get 1 free main courses from top restaurants like Wagyu, La Paloma, French Window, JASPAS and more in the Food & Drink category, or browse yoga, Pilates, manicures and massages under Beauty & Fitness. There’s tons more to choose from in Attractions & Leisure, Retail & Services and Hotels Worldwide. The offers are always changing, so sort by New for the latest and greatest."
+				"id": 12
+				"image": "https://image-url"
+				"is_enabled": 1
+				"max_usages": 1
+				"promotion_type": "Message"
+				"ranking": 5
+				"short_description": "On every favorite dish"
+				"title": "Buy 1 get 1"
+				"usages": 0
+				"valid_from": "2017-10-06 05:53:00"
+				"valid_to": "2017-12-09 05:53:00"
+            }
         }
 
