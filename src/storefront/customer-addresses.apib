@@ -1,8 +1,12 @@
 ### Customer's addresses [/api/v1/storefront/customers/me/addresses]
 
-#### List all addresses, if lat and lng provided, it will attach the distance from that location on each address [GET /api/v2/storefront/customers/me/addresses]
+If you're offering delivery in some way, shape or form to your customers, they'll need to store one (or multiple) addresses in the system.
 
-@todo: there is also a v1 namespaced endpoint for retrieving this. What is the difference?
+#### List all addresses [GET /api/v2/storefront/customers/me/addresses]
+
+Using this endpoint an authenticated customer can retrieve all of their stored addresses.
+
+Note: if lat and lng parameters are provided, it will attach the distance from that location on each address.
 
 + Request (application/json)
 
@@ -10,7 +14,7 @@
             "lat": "13.730711000000",
             "lng": "100.594267000000"
         }
- 
+
 + Response 200 (application/json)
 
         {
@@ -39,6 +43,8 @@
         }
 
 #### Get address details [GET /api/v1/storefront/customers/me/address/{address_id}]
+
+A customer may also wish to retrieve information about a single address they've previously stored in the system.
 
 + Response 200 (application/json)
 
@@ -163,4 +169,3 @@
                 "customer_google_account_id": null
             }
         }
-
