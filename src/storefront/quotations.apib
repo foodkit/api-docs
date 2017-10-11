@@ -2,30 +2,159 @@
 
 #### Cart quote [POST /api/v3/storefront/vendors/{vendor_id}/carts/quote]
 
+Validates a potential order and returns the cost and fees associated with the order.
+Normally, a client will maintain a "cart" with the current products added by the customer as well as storing the delivery information for the order to be created. Clients will typically call this endpoint on any change to this information to be able to display up-to-date information about the cost of the order.
+
+Note that the totals data structure has identical format to the same attribute in an order.
+
 + Request (application/json)
 
+  + Attributes
+
+      + latitude (number) - latitude of the delivery location (only relevant for delivery orders).
+      + longitude (number) - longitude of the delivery location (only revevant for delivery orders).
+      + order_type (string) - the order type ("delivery" or "pickup").
+      + payment_type (string) - the payment method ("cod" or "credit_card").
+      + products (array) - an array containing the product IDs, quantities and any relevant extra items.
+
+  + Body
+
         {
-            "data": "tba"
+            "latitude": 13.726315,
+            "longitude": 100.59150720000002,
+            "order_type": "delivery",
+            "payment_type": "cod",
+            "products": [
+                {
+                    "id": 14906,
+                    "quantity": 1,
+                    "has_comments": 0,
+                    "extra_items": []
+                },
+                {
+                    "id": 14559,
+                    "quantity": 2,
+                    "has_comments": 0,
+                    "extra_items": [
+                        {
+                            "id": 6631
+                        }
+                    ]
+                }
+            ]
         }
 
 + Response 200 (application/json)
 
-        {
-            "data": "tba"
-        }
+  + Attributes
 
-#### Calculate delivery cost [GET /api/v1/storefront/vendors/{vendor_id}/delivery-cost]
+      + total_items (number) - The total number of products in the order.
+      + total_unique_items (array) - The total number of different products in the order. Products are different if they have different IDs or a different set of extras.
+      + line_items (array) - The items in the order. Note that these are not necessarily identical to the products sent, since free products can be added as part of a promotion. Also, invalid products will not be part of the response.
+      + no_non_discounted_items (boolean) - True if and only if a promotion code was sent with the request but it does not apply to any products in the order (e.g. because all items in the order already were discounted).
+      + distance (number) - For deliveries, the number of kilometers delivery distance. This is the distance on which delivery costs are based. The distance is an approximation of the street distance from the closest delivering store to the delivery destination as given by the coordinates sent.
+      + coupon (string) - Only present if a discount code was sent with the request.
+      + code (string) - The coupon code sent,
+      + discount (number) - The absolute discount the code entitles to. Will be 0 if the coupon offers a relative discount.
+      + type (string) - Either 'absolute' or 'relative', depending on the type of coupon.
+      + discount_percentage (number) - The percentage discount the code entitles to. Will be 0 if the code offers an absolute discount (i.e. a certain amount of money).
+      + totals (object) - The total cost and fees.
+      + discount (number) - The total discount applied to the order, resulting either from a coupon code or a vendor discount on all product. If a product has a reduced price ("before sale price" is set), that is not considered a discount. The discount is either inclusive or exclusive of VAT, depending on the VAT mode.
+      + discount_percentage (number) - The percentage discount that was applied, if the discount is relative (otherwise 0).
+      + coupon_discount (number) - The discount amount applied as result of a coupon. This will be the same value as coupon/discount. The coupon discount is either inclusive or exclusive of VAT, depending on the VAT mode.
+      + delivery_fee (number) - The cost of delivery. 0 in the case of a pickup order. The delivery cost is mainly based on the delivery distance of the order. The delivery is always inclusive of VAT.
+      + payment_fee (number) - Fees (amount) incurred for payment processing (e.g. credit card). 0 if none. Always inclusive of VAT.
+      + payment_fee_percentage (number) - Payment processing fees are always relative to the subtotal. This field returns the payment fee as a percentage value.
+      + service_fee (number) - The service fee charged by Ginja on the order. Always inclusive of VAT.
+      + service_fee_percentage (number) - Service fees are always relative to the subtotal. This field returns the payment fee as a percentage value.
+      + vat (number) - The total amount VAT paid on any component of the cost of the order (fees, items, etc).
+      + vat_percentage (number) - The VAT percentage paid.
+      + excluded_taxes (number) - If the prices are exclusive of VAT (which is a backend setting), this attribute will contain the VAT on the subtotal
+      + included_taxes (number) - This seems to be the VAT on the subtotal (i.e. not including fees)
+      + taxable_amount (number) - The amount on which VAT is calculated if the vendor is excluding VAT
+      + subtotal (number) - The price for all items excluding discounts. May or may not include VAT.
+      + total (number) - The amount the user has to pay for the order.
 
-+ Request (application/json)
+  + Body
 
-        {
-            "data": "tba"
-        }
+            {
+               "data":{
+                  "total_items":3,
+                  "total_unique_items":2,
+                  "line_items":[
+                     {
+                        "id":14906,
+                        "name":"Long Black",
+                        "quantity":1,
+                        "price":115,
+                        "before_sale_price":null,
+                        "images":{
+                           "full_size":"https:\/\/res.cloudinary.com\/ginja-co-ltd\/image\/upload\/s--MpeVBF1d--\/q_jpegmini\/v1502609795\/vendors\/the-coffee-club-205\/products\/long-black-14906",
+                           "thumbnail":"https:\/\/res.cloudinary.com\/ginja-co-ltd\/image\/upload\/s--VSNIAT8K--\/c_fill,h_70,q_jpegmini,w_103\/v1502609795\/vendors\/the-coffee-club-205\/products\/long-black-14906",
+                           "thumbnail_retina":"https:\/\/res.cloudinary.com\/ginja-co-ltd\/image\/upload\/s--s3z-Ay1---\/c_fill,h_140,q_jpegmini,w_206\/v1502609795\/vendors\/the-coffee-club-205\/products\/long-black-14906"
+                        },
+                        "extra_items":[
+
+                        ]
+                     },
+                     {
+                        "id":14559,
+                        "name":"Caf\u00e9 Latte Long",
+                        "quantity":2,
+                        "price":125,
+                        "before_sale_price":null,
+                        "images":{
+                           "full_size":"https:\/\/res.cloudinary.com\/ginja-co-ltd\/image\/upload\/s--8RLWz21C--\/q_jpegmini\/v1499066057\/vendors\/the-coffee-club-205\/products\/cafe-latte-long-14559",
+                           "thumbnail":"https:\/\/res.cloudinary.com\/ginja-co-ltd\/image\/upload\/s--oHBrj5Hu--\/c_fill,h_70,q_jpegmini,w_103\/v1499066057\/vendors\/the-coffee-club-205\/products\/cafe-latte-long-14559",
+                           "thumbnail_retina":"https:\/\/res.cloudinary.com\/ginja-co-ltd\/image\/upload\/s--6weVuGOq--\/c_fill,h_140,q_jpegmini,w_206\/v1499066057\/vendors\/the-coffee-club-205\/products\/cafe-latte-long-14559"
+                        },
+                        "extra_items":[
+                           {
+                              "id":6631,
+                              "name":"Full Milk",
+                              "price":0
+                           }
+                        ]
+                     }
+                  ],
+                  "coupon":null,
+                  "distance":null,
+                  "loyalty_id":null,
+                  "loyalty_points":0,
+                  "totals":{
+                     "discount":0,
+                     "discount_percentage":0,
+                     "coupon_discount":0,
+                     "delivery_fee":0,
+                     "payment_fee":0,
+                     "payment_fee_type":"none",
+                     "payment_fee_amount":0,
+                     "payment_fee_percentage":null,
+                     "payment_fee_fixed":null,
+                     "service_fee":0,
+                     "service_fee_percentage":0,
+                     "subtotal":365,
+                     "excluded_taxes":0,
+                     "taxable_amount":0,
+                     "vat":23.88,
+                     "vat_percentage":7,
+                     "total":365,
+                     "rounding":0
+                  },
+                  "no_non_discounted_items":false
+               }
+            }
+
+#### Calculate delivery cost [GET /api/v1/storefront/vendors/{vendor_id}/delivery-cost{?location}]
+
++ Parameters
+  + location: 13.719731,100.585256 (string)
 
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+          "data": {
+            "cost": 70,
+            "distance": 3.5
+          }
         }
-
-

@@ -5,7 +5,64 @@
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+          "data": [
+            {
+              "id": 14995,
+              "name": "Hot Green Tea Latte",
+              "price": 125,
+              "before_sale_price": null,
+              "description": "",
+              "full_description": "",
+              "order": 1,
+              "category": {
+                "id": 1786,
+                "name": "Specialty Drinks",
+                "name_th": "",
+                "category_image_src": null,
+                "order": 2,
+                "code": 0
+              },
+              "images": {
+                "full_size": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--X5Vb8zNB--/q_jpegmini/v1498735033/vendors/the-coffee-club-205/products/hot-green-tea-latte-14552",
+                "thumbnail": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--SOATuNEe--/c_fill,h_70,q_jpegmini,w_103/v1498735033/vendors/the-coffee-club-205/products/hot-green-tea-latte-14552",
+                "thumbnail_retina": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--E892BxR_--/c_fill,h_140,q_jpegmini,w_206/v1498735033/vendors/the-coffee-club-205/products/hot-green-tea-latte-14552"
+              },
+              "extras": [],
+              "extra_items": [],
+              "variants": null,
+              "type": null,
+              "is_enabled": true,
+              "has_comments": 0
+            },
+            {
+              "id": 14996,
+              "name": "Chai Latte Long",
+              "price": 155,
+              "before_sale_price": null,
+              "description": "",
+              "full_description": "",
+              "order": 2,
+              "category": {
+                "id": 1786,
+                "name": "Specialty Drinks",
+                "name_th": "",
+                "category_image_src": null,
+                "order": 2,
+                "code": 0
+              },
+              "images": {
+                "full_size": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--xWDAsqeI--/q_jpegmini/v1498735033/vendors/the-coffee-club-205/products/chai-latte-long-14553",
+                "thumbnail": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--bRHDSvuf--/c_fill,h_70,q_jpegmini,w_103/v1498735033/vendors/the-coffee-club-205/products/chai-latte-long-14553",
+                "thumbnail_retina": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--wzQSa_KF--/c_fill,h_140,q_jpegmini,w_206/v1498735033/vendors/the-coffee-club-205/products/chai-latte-long-14553"
+              },
+              "extras": [],
+              "extra_items": [],
+              "variants": null,
+              "type": null,
+              "is_enabled": true,
+              "has_comments": 0
+            }
+          ]
         }
 
 #### Get all extra items [GET /api/v1/storefront/vendors/{id}/extra-items]
@@ -13,7 +70,20 @@
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+          "data": [
+            {
+              "id": 6736,
+              "name": "Fried Egg",
+              "extra_id": 1566,
+              "price": 27
+            },
+            {
+              "id": 6737,
+              "name": "Thai Omelette",
+              "extra_id": 1566,
+              "price": 27
+            }
+          ]
         }
 
 #### Get a single product [GET /api/v1/storefront/vendors/{id}/products/{id}]
@@ -21,7 +91,34 @@
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+          "data": {
+            "id": 14995,
+            "name": "Hot Green Tea Latte",
+            "price": 125,
+            "before_sale_price": null,
+            "description": "",
+            "full_description": "",
+            "order": 1,
+            "category": {
+              "id": 1786,
+              "name": "Specialty Drinks",
+              "name_th": "",
+              "category_image_src": null,
+              "order": 2,
+              "code": 0
+            },
+            "images": {
+              "full_size": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--X5Vb8zNB--/q_jpegmini/v1498735033/vendors/the-coffee-club-205/products/hot-green-tea-latte-14552",
+              "thumbnail": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--SOATuNEe--/c_fill,h_70,q_jpegmini,w_103/v1498735033/vendors/the-coffee-club-205/products/hot-green-tea-latte-14552",
+              "thumbnail_retina": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--E892BxR_--/c_fill,h_140,q_jpegmini,w_206/v1498735033/vendors/the-coffee-club-205/products/hot-green-tea-latte-14552"
+            },
+            "extras": [],
+            "extra_items": [],
+            "variants": null,
+            "type": null,
+            "is_enabled": true,
+            "has_comments": 0
+          }
         }
 
 

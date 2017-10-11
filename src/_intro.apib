@@ -21,7 +21,9 @@ Before you can do anything, you'll need to fetch an access token. For the storef
 
 ### Get a new access token [POST]
 
-First an example of a guest token request. Typically you'll want to fetch a guest token where you want to support a "browse" feature for unauthenticated users without allowing them to create transactions or view/edit any customer specific information. You can simply request this using the payload below (no user-specific credentials required):
+Two examples are provided. First is a guest token request. Typically you'll want to fetch a guest token where you want to support a "browse" feature for unauthenticated users without allowing them to create transactions or view/edit any customer specific information. You can simply request this using the payload below (no user-specific credentials required).
+
+The second is an example of a request for a registered user. In the provided example, the user authenticates with a username (phone number) and password, but other authentication mechanisms are also supported (e.g: Facebook and Google).
 
 + Request (application/json)
 
@@ -35,12 +37,10 @@ First an example of a guest token request. Typically you'll want to fetch a gues
 + Response 200 (application/json)
 
         {
-            "access_token":"O2144OIltvzisLlM857720LOoaDwigLJKjiapPUjLS",
-            "token_type":"Bearer",
-            "expires_in":86400
+            "access_token": "O2144OIltvzisLlM857720LOoaDwigLJKjiapPUjLS",
+            "token_type": "Bearer",
+            "expires_in": 86400
         }
-
-Now an example of a request for a registered user. In this example, the user authenticates with a username (phone number) and password, but other authentication mechanisms are also supported (e.g: Facebook and Google).
 
 + Request (application/json)
 

@@ -2,28 +2,128 @@
 
 #### Branches [GET /api/v3/storefront/child-vendors]
 
-+ Response 200 (application/json)
-
-        {
-            "data": "tba"
-        }
-
-#### Branch search [GET /api/v1/storefront/vendors]
-
-@todo: there's also a v2 endpoint.. what's the different and which should we use?
++ Parameters
+        + multistore_parent_id
+        + type
+        + location
 
 + Response 200 (application/json)
 
         {
-            "data": "tba"
-        }
-
-#### Branch search result count [GET /api/v1/storefront/vendors/count]
-
-+ Response 200 (application/json)
-
-        {
-            "data": "tba"
+          "total": 1,
+          "per_page": 100,
+          "current_page": 1,
+          "last_page": 1,
+          "next_page_url": null,
+          "prev_page_url": null,
+          "from": 1,
+          "to": 1,
+          "data": [
+            {
+              "id": 229,
+              "is_active": true,
+              "name": "DEVSTORE (Ekamai)",
+              "short_name": "Devstore Ekamai",
+              "description": "Restaurant description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur fermentum viverra nunc, id sodales metus venenatis eget. Suspendisse imperdiet, mi ac scelerisque rhoncus, dolor risus vehicula sem, sed iaculis erat eros id ex. Nulla facilisi. Nam ut justo id metus viverra pretium. Donec mattis, lorem ut varius volutpat, ex metus tempor ante, a rhoncus lacus sapien maximus massa. Phasellus in metus odio. Aenean hendrerit vehicula nulla, eu eleifend odio congue vitae. Quisque mi lacus, viverra et sodales at, tempus ac risus. Aliquam at efficitur purus. Integer nec vestibulum ligula. Aene",
+              "code": "RS4",
+              "tax_mode": 1,
+              "default_locale": "en",
+              "poc_support_locale": "en",
+              "restaurant_support_locale": "en",
+              "is_multistore_parent": false,
+              "multistore_parent_id": 228,
+              "timezone": "Asia/Bangkok",
+              "delivery_fee": 0,
+              "service_fee_percentage": 0,
+              "discount_percentage": 0,
+              "minimum_order": 100,
+              "address1": "Restaurant Test Address Line 1",
+              "address2": "Restaurant Test Address Line 2",
+              "district": null,
+              "city": "Bangkok",
+              "postcode": "",
+              "country": "Thailand",
+              "latitude": 13.740103,
+              "longitude": 100.589,
+              "phone_number": "0942897158",
+              "email": "jess+testrestaurant@ginja.co.th",
+              "is_realtime_enabled": true,
+              "is_scheduled_enabled": true,
+              "is_pickup_enabled": true,
+              "is_delivery_enabled": true,
+              "is_chat_enabled": false,
+              "is_self_delivered": false,
+              "delivery_fee_type": 2,
+              "delivery_discount_percentage": 0,
+              "delivery_time": 60,
+              "accepts_cod": true,
+              "accepts_credit_cards": true,
+              "cod_fee_fixed": 25,
+              "cod_fee_percentage": 0,
+              "credit_card_fee_fixed": 0,
+              "credit_card_fee_percentage": 2.8,
+              "banner_images": {
+                "fullsize": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--H6EHFFln--/q_jpegmini/v1505317773/vendors/restaurant-225/restaurant-banner_image-1497861892",
+                "desktop": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--FQGsjN0A--/c_fill,q_jpegmini,w_1280/v1505317773/vendors/restaurant-225/restaurant-banner_image-1497861892",
+                "1024x512": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--sE42TCrC--/c_fill,h_512,q_jpegmini,w_1024/v1505317773/vendors/restaurant-225/restaurant-banner_image-1497861892",
+                "600x300": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--WzZTbJA4--/c_fill,h_300,q_jpegmini,w_600/v1505317773/vendors/restaurant-225/restaurant-banner_image-1497861892"
+              },
+              "logo_images": {
+                "64x64": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--3cwkz3Py--/c_fill,h_128,q_jpegmini,w_128/v1505317773/vendors/restaurant-225/restaurant-logo_image-1497861889",
+                "128x128": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--3cwkz3Py--/c_fill,h_128,q_jpegmini,w_128/v1505317773/vendors/restaurant-225/restaurant-logo_image-1497861889"
+              },
+              "opening_hours": {
+                "sunday": [
+                  {
+                    "open": "0800",
+                    "close": "2230"
+                  }
+                ],
+                "monday": [
+                  {
+                    "open": "0800",
+                    "close": "2230"
+                  }
+                ],
+                "tuesday": [
+                  {
+                    "open": "0800",
+                    "close": "2230"
+                  }
+                ],
+                "wednesday": [
+                  {
+                    "open": "0800",
+                    "close": "2230"
+                  }
+                ],
+                "thursday": [
+                  {
+                    "open": "0800",
+                    "close": "2230"
+                  }
+                ],
+                "friday": [
+                  {
+                    "open": "0800",
+                    "close": "2230"
+                  }
+                ],
+                "saturday": [
+                  {
+                    "open": "0800",
+                    "close": "2230"
+                  }
+                ]
+              },
+              "website": null,
+              "distance_from_customer": null,
+              "has_loyalty_programme": false,
+              "minimum_credit_card_amount": 300,
+              "customer_service_phone_number": null,
+              "customer_service_email": ""
+            }
+          ]
         }
 
 #### Branch details [GET /api/v3/storefront/vendors/{id}]
@@ -31,5 +131,108 @@
 + Response 200 (application/json)
 
         {
-            "data": "tba"
+          "data": {
+            "id": 229,
+            "is_active": true,
+            "name": "DEVSTORE (Ekamai)",
+            "short_name": "Devstore Ekamai",
+            "description": "Restaurant description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur fermentum viverra nunc, id sodales metus venenatis eget. Suspendisse imperdiet, mi ac scelerisque rhoncus, dolor risus vehicula sem, sed iaculis erat eros id ex. Nulla facilisi. Nam ut justo id metus viverra pretium. Donec mattis, lorem ut varius volutpat, ex metus tempor ante, a rhoncus lacus sapien maximus massa. Phasellus in metus odio. Aenean hendrerit vehicula nulla, eu eleifend odio congue vitae. Quisque mi lacus, viverra et sodales at, tempus ac risus. Aliquam at efficitur purus. Integer nec vestibulum ligula. Aene",
+            "code": "RS4",
+            "tax_mode": 1,
+            "default_locale": "en",
+            "poc_support_locale": "en",
+            "restaurant_support_locale": "en",
+            "is_multistore_parent": false,
+            "multistore_parent_id": 228,
+            "timezone": "Asia/Bangkok",
+            "delivery_fee": 0,
+            "service_fee_percentage": 0,
+            "discount_percentage": 0,
+            "minimum_order": 100,
+            "address1": "Restaurant Test Address Line 1",
+            "address2": "Restaurant Test Address Line 2",
+            "district": null,
+            "city": "Bangkok",
+            "postcode": "",
+            "country": "Thailand",
+            "latitude": 13.740103,
+            "longitude": 100.589,
+            "phone_number": "0942897158",
+            "email": "jess+testrestaurant@ginja.co.th",
+            "is_realtime_enabled": true,
+            "is_scheduled_enabled": true,
+            "is_pickup_enabled": true,
+            "is_delivery_enabled": true,
+            "is_chat_enabled": false,
+            "is_self_delivered": false,
+            "delivery_fee_type": 2,
+            "delivery_discount_percentage": 0,
+            "delivery_time": 60,
+            "accepts_cod": true,
+            "accepts_credit_cards": true,
+            "cod_fee_fixed": 25,
+            "cod_fee_percentage": 0,
+            "credit_card_fee_fixed": 0,
+            "credit_card_fee_percentage": 2.8,
+            "banner_images": {
+              "fullsize": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--H6EHFFln--/q_jpegmini/v1505317773/vendors/restaurant-225/restaurant-banner_image-1497861892",
+              "desktop": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--FQGsjN0A--/c_fill,q_jpegmini,w_1280/v1505317773/vendors/restaurant-225/restaurant-banner_image-1497861892",
+              "1024x512": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--sE42TCrC--/c_fill,h_512,q_jpegmini,w_1024/v1505317773/vendors/restaurant-225/restaurant-banner_image-1497861892",
+              "600x300": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--WzZTbJA4--/c_fill,h_300,q_jpegmini,w_600/v1505317773/vendors/restaurant-225/restaurant-banner_image-1497861892"
+            },
+            "logo_images": {
+              "64x64": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--3cwkz3Py--/c_fill,h_128,q_jpegmini,w_128/v1505317773/vendors/restaurant-225/restaurant-logo_image-1497861889",
+              "128x128": "https://res.cloudinary.com/ginja-co-ltd/image/upload/s--3cwkz3Py--/c_fill,h_128,q_jpegmini,w_128/v1505317773/vendors/restaurant-225/restaurant-logo_image-1497861889"
+            },
+            "opening_hours": {
+              "sunday": [
+                {
+                  "open": "0800",
+                  "close": "2230"
+                }
+              ],
+              "monday": [
+                {
+                  "open": "0800",
+                  "close": "2230"
+                }
+              ],
+              "tuesday": [
+                {
+                  "open": "0800",
+                  "close": "2230"
+                }
+              ],
+              "wednesday": [
+                {
+                  "open": "0800",
+                  "close": "2230"
+                }
+              ],
+              "thursday": [
+                {
+                  "open": "0800",
+                  "close": "2230"
+                }
+              ],
+              "friday": [
+                {
+                  "open": "0800",
+                  "close": "2230"
+                }
+              ],
+              "saturday": [
+                {
+                  "open": "0800",
+                  "close": "2230"
+                }
+              ]
+            },
+            "website": null,
+            "distance_from_customer": null,
+            "has_loyalty_programme": false,
+            "minimum_credit_card_amount": 300,
+            "customer_service_phone_number": null,
+            "customer_service_email": ""
+          }
         }
