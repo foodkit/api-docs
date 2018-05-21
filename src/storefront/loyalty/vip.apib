@@ -24,9 +24,9 @@ Registers a customer for the VIP program. If they're already a member, this will
     + Attributes
         - data (Member)
 
-#### Get details [GET /api/v4/storefront/brands/{brand_id}/loyalty/vip/customers/{customer_id}]
+#### Get member details [GET /api/v4/storefront/brands/{brand_id}/loyalty/vip/customers/{customer_id}]
 
-Use this endpoint to check the customer's VIP status.
+Use this endpoint to check the customer's VIP status. If the customer _is_ a member, you'll get the number of membership points.
 
   + Parameters
     + brand_id: 465 (number)
@@ -37,13 +37,17 @@ Use this endpoint to check the customer's VIP status.
         - data (Member)
 
 
-#### Get [GET /api/v4/storefront/brands/{brand_id}/loyalty/vip]
+#### Get loyalty program details [GET /api/v4/storefront/brands/{brand_id}/loyalty/vip]
+
+Retrieve the details of the brand's loyalty program (if it exists). If there is no loyalty program, you'll simply get `null`.
 
 + Response 200 (application/json)
     + Attributes
         - data (Vip)
 
 #### Redeem reward [POST /api/v4/storefront/brands/{brand_id}/loyalty/vip/customers/{customer_id}/rewards/{reward_id}]
+
+Use this endpoint when a consumer wants to redeem a coupon. If the coupon has already been redeemed (and can only be redeemed once), you'll get the same response for each call.
 
   + Parameters
     + brand_id: 465 (number)
