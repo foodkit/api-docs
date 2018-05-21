@@ -1,0 +1,133 @@
+### Customer VIP Membership [/api/v4/storefront/brands/{brand_id}/loyalty/vip/customers/{customer_id}]
+
+  + Parameters
+    + brand_id: 465 (number)
+    + customer_id: 71713 (number)
+
+#### Sign up [POST /api/v4/storefront/brands/{brand_id}/loyalty/vip/customers/{customer_id}/vip]
+
+Registers a customer for the VIP program. If they're already a member, this will update their membership details.
+
+  + Parameters
+    + brand_id: 465 (number)
+    + customer_id: 71713 (number)
+
++ Request (application/json)
+
+  + Body
+
+            {
+                "date_of_birth": "2000-04-20"
+            }
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Member)
+
+#### Get details [GET /api/v4/storefront/brands/{brand_id}/loyalty/vip/customers/{customer_id}]
+
+Use this endpoint to check the customer's VIP status.
+
+  + Parameters
+    + brand_id: 465 (number)
+    + customer_id: 71713 (number)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Member)
+
+
+#### Get [GET /api/v4/storefront/brands/{brand_id}/loyalty/vip]
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Vip)
+
+#### Redeem reward [POST /api/v4/storefront/brands/{brand_id}/loyalty/vip/customers/{customer_id}/rewards/{reward_id}]
+
+  + Parameters
+    + brand_id: 465 (number)
+    + customer_id: 1245 (number)
+    + reward_id: 641 (number)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Reward)
+
+### Data Structures
+
+#### Customer (object)
+
+- id (number)
+- profile_image_src: `https://lorempixel.com/64/64` (string)
+- email: `corey@foodkit.io` (string)
+- name: `Corey M` (string)
+- phone_number: `+66942801234` (string)
+- idp: password (enum[string])
+    - password
+    - facebook
+    - google
+- default_locale: `en` (enum[string])
+    - en
+    - th
+- user_id: 784378 (number)
+
+#### Member (object)
+
+- id: 3123 (number)
+- date_of_birth: `2000-04-20` (string)
+- points: 500 (number)
+- tier (TierWithRewards)
+- next_tier (TierWithRewards)
+- next_tier_points: 1000 (number)
+- customer (Customer)
+
+#### Program (object)
+
+- id: 311213 (number)
+- name: `Membership Program` (string)
+
+#### Reward (object)
+
+- id (number)
+- description: `To qualify you must join 3 days before your birthday. We'll send you an email a few days before your birthday reminding you of your reward. To redeem your reward, just go to a participating store and tell the barista you have a free reward, and then scan your mobile app.<br><br>It's that easy.` (string)
+- expires_at: `2018-09-01 00:00:00` (string)
+- images (object)
+    - small
+        - 32x32: `https://lorempixel.com/32/32` (string)
+        - 64x64: `https://lorempixel.com/64/64` (string)
+    - large
+        - 375x232: `https://lorempixel.com/375/232` (string)
+        - 750x464: `https://lorempixel.com/750/464` (string)
+- name: `Free Classic Espresso Drink`
+- type: `qr` (string)
+- status: `available` (enum[string])
+    - activated
+    - available
+    - expired
+    - redeemed
+
+#### Tier (object)
+
+- id (number)
+- milestone: 500 (number)
+- image (object)
+  - 64x64: `https://lorempixel.com/64/64` (string)
+  - 128x128: `https://lorempixel.com/128/128` (string)
+- name: `Piccolo` (string)
+
+#### TierWithRewards (object)
+
+- id (number)
+- milestone: 500 (number)
+- name: `Piccolo` (string)
+- image (object)
+  - 64x64: `https://lorempixel.com/64/64` (string)
+  - 128x128: `https://lorempixel.com/128/128` (string)
+- rewards (array[Reward])
+
+#### Vip (object)
+
+- id: 1423 (number)
+- name: `Membership Program` (string)
+- tiers (array[Tier])

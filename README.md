@@ -18,6 +18,12 @@ cat src//vendor/*.apib >> build/foodkit-api.apib
 cat src//support/*.apib >> build/foodkit-api.apib
 ```
 
+## Livereload ##
+
+```
+./node_modules/.bin/aglio -i src/storefront/loyalty/vip.apib --server
+```
+
 ## Example ##
 
 You can see an example of a Apiary-powered API Blueprint definition [here](http://docs.foodkitapiexample.apiary.io/).

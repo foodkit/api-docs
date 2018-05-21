@@ -1,0 +1,23 @@
+{
+  "name": "api-docs",
+  "version": "1.0.0",
+  "description": "Documentation for the Foodkit API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foodkit/api-docs.git"
+  },
+  "author": "Corey Mcmahon <corey@foodkit.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/foodkit/api-docs/issues"
+  },
+  "homepage": "https://github.com/foodkit/api-docs#readme",
+  "dependencies": {
+    "aglio": "^2.3.0",
+    "dredd": "^5.1.7"
+  }
+}
