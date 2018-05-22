@@ -1,0 +1,169 @@
+### VIP Program [/api/v4/admin/brands/{brand_id}/loyalty/vip]
+
+#### Get loyalty program(s) [GET /api/v4/admin/brands/{brand_id}/loyalty]
+
++ Parameters
+    + brand_id: 1 (number)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (object)
+            - vip (VipProgram)
+
+#### Get VIP program details [GET /api/v4/admin/brands/{brand_id}/loyalty/vip]
+
++ Parameters
+    + brand_id: 1 (number)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (VipProgram)
+
+#### Update VIP program details [POST /api/v4/admin/brands/{brand_id}/loyalty/vip]
+
++ Parameters
+    + brand_id: 1 (number)
+
++ Response 200 (application/json)
+
+#### Get VIP tiers details [GET /api/v4/admin/brands/{brand_id}/loyalty/vip/tiers]
+
++ Parameters
+    + brand_id: 1 (number)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (array[Tier])
+
+#### Get VIP tier details [GET /api/v4/admin/brands/{brand_id}/loyalty/vip/tiers/{tier_id}]
+
++ Parameters
+    + brand_id: 1 (number)
+    + tier_id: 32 (number)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Tier)
+
+#### Update VIP tier [PATCH /api/v4/admin/brands/{brand_id}/loyalty/vip/tiers/{tier_id}]
+
++ Parameters
+    + brand_id: 1 (number)
+    + tier_id: 32 (number)
+
++ Response 200 (application/json)
+
+#### Create VIP tier [POST /api/v4/admin/brands/{brand_id}/loyalty/vip/tiers]
+
++ Parameters
+    + brand_id: 1 (number)
+
++ Response 200 (application/json)
+
+#### Get VIP tier rewards [GET /api/v4/admin/brands/{brand_id}/loyalty/vip/tiers/{tier_id}/rewards]
+
++ Parameters
+    + brand_id: 1 (number)
+    + tier_id: 32 (number)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (array[Reward])
+
+#### Create VIP tier reward [POST /api/v4/admin/brands/{brand_id}/loyalty/vip/tiers/{tier_id}/rewards/{reward_id}]
+
++ Parameters
+    + brand_id: 1 (number)
+    + tier_id: 32 (number)
+
++ Response 200 (application/json)
+
+#### Get VIP tier reward [GET /api/v4/admin/brands/{brand_id}/loyalty/vip/tiers/{tier_id}/rewards/{reward_id}]
+
++ Parameters
+    + brand_id: 1 (number)
+    + tier_id: 32 (number)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Reward)
+
+#### Update VIP tier reward [PATCH /api/v4/admin/brands/{brand_id}/loyalty/vip/tiers/{tier_id}/rewards/{reward_id}]
+
++ Parameters
+    + brand_id: 1 (number)
+    + tier_id: 32 (number)
+
++ Response 200 (application/json)
+
+### Data Structures
+
+#### VipProgram (object)
+
+- id: 9184 (number)
+- description: `` (string)
+- is_active: true (boolean)
+- milestone_period: all_time (enum[string])
+    - all_time
+    - current_balance
+    - past_year
+- milestone_type: `revenue` (enum[string])
+    - revenue
+    - purchases
+    - points
+- title: `The Demo Store VIP Membership` (string)
+- created_at: `2018-01-20 09:23:01` (string)
+- updated_at: `2018-01-20 09:23:01` (string)
+
+#### Tier (object)
+
+- id: 1233 (number)
+- image (object)
+  - 64x64: `https://lorempixel.com/64/64` (string)
+  - 128x128: `https://lorempixel.com/128/128` (string)
+- milestone: 500 (number)
+- name: `Piccolo` (string)
+- rewards (array[Reward])
+- created_at: `2018-01-20 09:23:01` (string)
+- updated_at: `2018-01-20 09:23:01` (string)
+
+#### Reward (object)
+
+@todo: how do we link to promotions and/or coupon codes?
+
+- id: 153 (number)
+- description: `...` (string)
+- expires_at: `2018-09-01 00:00:00` (string)
+- images (object)
+    - small
+        - 32x32: `https://lorempixel.com/32/32` (string)
+        - 64x64: `https://lorempixel.com/64/64` (string)
+    - large
+        - 375x232: `https://lorempixel.com/375/232` (string)
+        - 750x464: `https://lorempixel.com/750/464` (string)
+- max_redemptions: 0 (number)
+- name: `Free Classic Espresso Drink`
+- status: `available` (enum[string])
+    - activated
+    - available
+    - expired
+    - redeemed
+- type: `qr` (enum[string])
+    - qr
+    - barcode
+    - link
+    - online
+- created_at: `2018-01-20 09:23:01` (string)
+- updated_at: `2018-01-20 09:23:01` (string)
+
+#### Redeemable (object)
+
+- id: 7754 (number)
+- payload: `89234089920224244157`
+- reward_id: 12 (number)
+- redeemed_at: null (string)
+- redeemed_by: 2342 (number)
+- source: `pos` (enum[string])
+- type: `qr`
+- created_at: `2018-01-20 09:23:01` (string)
+- updated_at: `2018-01-20 09:23:01` (string)
