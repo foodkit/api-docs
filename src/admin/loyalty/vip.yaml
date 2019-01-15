@@ -12,9 +12,138 @@ info:
     url: "https://static.wixstatic.com/media/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.png/v1/fill/w_294,h_110,al_c,q_80,usm_0.66_1.00_0.01/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.webp"
     backgroundColor: "#FFFFFF"
     altText: "Foodkit logo"
+servers:
+  - url: http://{host}
+    variables:
+      host:
+        - api.ginja.co.th
+      default: api.ginja.co.th
 paths:
-
-  /api/v4/admin/loyalty/brands/{brand}/vip/rewards:
+  /api/v4/admin/loyalty/brands/{brand}/vip/rewards/analytics:
+    parameters:
+      - $ref: '../../shared/components.parameters.yaml#/brand'
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - 'rewards management'
+      summary: Build a report with rewards usage numbers. Date range is inclusive.
+      parameters:
+        - name: start
+          in: query
+          required: true
+          schema:
+            type: date
+          example: "2018-07-01"
+        - name: end
+          in: query
+          required: true
+          schema:
+            type: date
+          example: "2018-07-02"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tiers:
+                    description: Points earned by members on each tier
+                    type: object
+                    example:
+                      {"2018-07-01": [{"tierName":"Hobbit", "pointsEarned":1},{"tierName":"Gandalf", "pointsEarned":33}]}
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          tierName:
+                            type: string
+                            example: Hobbit
+                          pointsEarned:
+                            type: integer
+                            min: 0
+                  points:
+                    description: A number of points earned by vip members via various channels split by dates
+                    type: object
+                    properties:
+                      online:
+                        description: Spent online
+                        example: {"2018-07-01": 106, "2018-07-02": 451}
+                        type: object
+                        additionalProperties:
+                          type: integer
+                      offline:
+                        description: Spent offline
+                        example: {"2018-07-01": 106, "2018-07-02": 451}
+                        type: object
+                        additionalProperties:
+                          type: integer
+                      other:
+                        description: Spent by other mean
+                        example: {"2018-07-01": 106, "2018-07-02": 451}
+                        type: object
+                        additionalProperties:
+                          type: integer
+                  spent_points:
+                    description: A number of points spent by vip members via various channels, split by dates
+                    type: object
+                    properties:
+                      online:
+                        description: Online redeem
+                        example: {"2018-07-01": 106, "2018-07-02": 451}
+                        type: object
+                        additionalProperties:
+                          type: integer
+                      offline:
+                        description: Offline redeem, on the counter
+                        example: {"2018-07-01": 106, "2018-07-02": 451}
+                        type: object
+                        additionalProperties:
+                          type: integer
+                      other:
+                        description: Redeemed by other mean
+                        example: {"2018-07-01": 106, "2018-07-02": 451}
+                        type: object
+                        additionalProperties:
+                          type: integer
+                  signups:
+                    description: A number of customers joined the program, split by dates
+                    example:
+                      {"2018-07-01": 0, "2018-07-02": 0}
+                    type: object
+                    additionalProperties:
+                      type: integer
+                  total_members:
+                    description: Shows the total number of members in the program
+                    type: integer
+                    minimum: 0
+                  member_growth:
+                    description: Shows how many new members joined the program recently
+                    type: object
+                    properties:
+                      last_week:
+                        type: integer
+                        minimum: 0
+                        example: 10
+                      last_month:
+                        type: integer
+                        minimum: 0
+                        example: 166
+                  best_performing_stores:
+                    description: Shows top-5 shops where customers earn the most points in a given time frame
+                    type: object
+                    additionalProperties:
+                      type: integer
+                    example: {"Central Airport kiosk": 681, "Grand Plaza Store":103}
+                  best_performing_members:
+                    description: Shows top-5 customers who earned the most points in a given time frame
+                    type: object
+                    additionalProperties:
+                      type: integer
+                    example: {"Gavin Yuu":190945, "Abigail French": 150711}
+  /api/v4/admin/loyalty/brands/{brand}/vip/rewards/:
     parameters:
       - $ref: '../../shared/components.parameters.yaml#/brand'
     get:
