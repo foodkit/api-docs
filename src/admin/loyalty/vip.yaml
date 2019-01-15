@@ -42,6 +42,10 @@ paths:
             type: date
           example: "2018-07-02"
       responses:
+        '403':
+          $ref: '../../shared/components.responses.yaml#/Unauthorized'
+        '500':
+          $ref: '../../shared/components.responses.yaml#/RuntimeFailure'
         200:
           content:
             application/json:
