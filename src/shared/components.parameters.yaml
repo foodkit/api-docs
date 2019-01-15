@@ -1,0 +1,8 @@
+brand:
+  name: brand
+  in: path
+  required: true
+  schema:
+    type: integer
+    minimum: 1
+  description: The brand ID

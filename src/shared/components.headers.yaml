@@ -1,0 +1,6 @@
+xResponseId:
+  schema:
+    type: string
+    format: uuid
+  required: true
+  description: A unique Id of the response

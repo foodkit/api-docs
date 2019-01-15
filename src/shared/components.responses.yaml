@@ -1,0 +1,27 @@
+InvalidInputResponse:
+  description: Input parameters do not conform to expected format
+  headers:
+    X-Response-Id:
+      $ref: 'components.headers.yaml#/xResponseId'
+  content:
+    application/json:
+      schema:
+        $ref: 'components.schemas.yaml#/InvalidInputError'
+RuntimeFailure:
+  description: Server failed to serve this request due to unresolvable runtime condition.
+  headers:
+    X-Response-Id:
+      $ref: 'components.headers.yaml#/xResponseId'
+  content:
+    application/json:
+      schema:
+        $ref: 'components.schemas.yaml#/Error'
+Unauthorized:
+  description: You have no access to perform this operation
+  headers:
+    X-Response-Id:
+      $ref: 'components.headers.yaml#/xResponseId'
+  content:
+    application/json:
+      schema:
+        $ref: 'components.schemas.yaml#/Error'
