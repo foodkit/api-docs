@@ -12,12 +12,6 @@ info:
     url: "https://static.wixstatic.com/media/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.png/v1/fill/w_294,h_110,al_c,q_80,usm_0.66_1.00_0.01/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.webp"
     backgroundColor: "#FFFFFF"
     altText: "Foodkit logo"
-servers:
-  - url: http://{host}
-    variables:
-      host:
-        - api.ginja.co.th
-      default: api.ginja.co.th
 paths:
   /api/v4/admin/loyalty/brands/{brand}/vip/rewards/analytics:
     parameters:
@@ -47,6 +41,7 @@ paths:
         '500':
           $ref: '../../shared/components.responses.yaml#/RuntimeFailure'
         200:
+          description: Get all analytical numbers
           content:
             application/json:
               schema:
@@ -67,7 +62,7 @@ paths:
                             example: Hobbit
                           pointsEarned:
                             type: integer
-                            min: 0
+                            minimum: 0
                   points:
                     description: A number of points earned by vip members via various channels split by dates
                     type: object
