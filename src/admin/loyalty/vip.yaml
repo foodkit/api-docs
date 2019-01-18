@@ -146,30 +146,36 @@ paths:
                             example: 166
                       best_performing_stores:
                         description: Shows top-5 shops where customers earn the most points in a given time frame
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            storeName:
-                              type: string
-                            pointsEarned:
-                              type: integer
-                          example:
-                            storeName: 'Central Airport kiosk'
-                            pointsEarned: 103
+                        type: object
+                        properties:
+                          points:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                storeName:
+                                  type: string
+                                points:
+                                  type: integer
+                              example:
+                                storeName: 'Central Airport kiosk'
+                                points: 103
                       best_performing_members:
                         description: Shows top-5 customers who earned the most points in a given time frame
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            memberName:
-                              type: string
-                            pointsEarned:
-                              type: integer
-                          example:
-                            memberName: 'John Snow'
-                            pointsEarned: 55
+                        type: object
+                        properties:
+                          points:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                memberName:
+                                  type: string
+                                points:
+                                  type: integer
+                              example:
+                                memberName: 'John Snow'
+                                points: 55
 
   /api/v4/admin/loyalty/brands/{brand}/vip/rewards/:
     parameters:

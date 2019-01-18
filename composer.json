@@ -1,0 +1,14 @@
+{
+    "name": "ginja-th/api-docs",
+    "description": "API documentation repository",
+    "license": "Proprietary",
+    "authors": [
+        {
+            "name": "Dmitry Lezhnev",
+            "email": "dmitry@foodkit.io"
+        }
+    ],
+    "require": {
+        "hkarlstrom/openapi-reader": "^0.2.2"
+    }
+}

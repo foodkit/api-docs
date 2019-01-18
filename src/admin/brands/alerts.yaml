@@ -14,6 +14,8 @@ paths:
   /api/v4/admin/brands/{brand}/alerts:
     get:
       summary: Returns a list of currently active alerts for various dashboards
+      tags:
+        - 'Get dashboard alerts'
       operationId: admin.brands.alert
       parameters:
         - name: type
@@ -28,6 +30,7 @@ paths:
           description: type of the dashboard to get alerts for
       responses:
         200:
+          description: Return all analytical numbers
           content:
             application/json:
               schema:

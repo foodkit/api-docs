@@ -20,6 +20,8 @@
     "aglio": "^2.3.0",
     "dredd": "^5.1.7",
     "redoc-cli": "^0.7.0",
-    "swagger-cli": "^2.2.1"
+    "speccy": "^0.8.7",
+    "swagger-cli": "^2.2.1",
+    "yamljs": "^0.3.0"
   }
 }
