@@ -13,7 +13,7 @@ info:
     backgroundColor: "#FFFFFF"
     altText: "Foodkit logo"
 paths:
-  /api/v4/admin/loyalty/brands/{brand}/vip/rewards/analytics:
+  /api/v4/admin/loyalty/brands/{brand}/vip/analytics:
     parameters:
       - $ref: '../../shared/components.parameters.yaml#/brand'
     get:
@@ -22,6 +22,9 @@ paths:
       tags:
         - 'rewards management'
       summary: Build a report with rewards usage numbers. Date range is inclusive.
+      description: |
+        # title
+        `code`
       parameters:
         - name: start
           in: query
@@ -42,106 +45,132 @@ paths:
           $ref: '../../shared/components.responses.yaml#/RuntimeFailure'
         200:
           description: Get all analytical numbers
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  tiers:
-                    description: Points earned by members on each tier
+                  data:
                     type: object
-                    example:
-                      {"2018-07-01": [{"tierName":"Hobbit", "pointsEarned":1},{"tierName":"Gandalf", "pointsEarned":33}]}
-                    additionalProperties:
-                      type: array
-                      items:
+                    properties:
+                      tierMembers:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            tierName:
+                              type: string
+                              example: Piccollo
+                            members:
+                              type: integer
+                              minimum: 0
+                      tiers:
+                        description: Points earned by members on each tier
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: date
+                              example: '2018-05-01'
+                            tiers:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  tierName:
+                                    type: string
+                                    example: Hobbit
+                                  pointsEarned:
+                                    type: integer
+                                    minimum: 0
+                      points:
+                        description: A number of points earned by vip members via various channels split by dates
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: date
+                              example: "2018-05-01"
+                            online:
+                              type: integer
+                            offline:
+                              type: integer
+                            other:
+                              type: integer
+                      spent_points:
+                        description: A number of points spent by vip members via various channels, split by dates
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: date
+                              example: "2018-05-01"
+                            online:
+                              type: integer
+                            offline:
+                              type: integer
+                            other:
+                              type: integer
+                      signups:
+                        description: A number of customers joined the program, split by dates
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: date
+                              example: "2018-05-01"
+                            signups:
+                              type: integer
+                      total_members:
+                        description: Shows the total number of members in the program
+                        type: integer
+                        minimum: 0
+                      member_growth:
+                        description: Shows how many new members joined the program recently
                         type: object
                         properties:
-                          tierName:
-                            type: string
-                            example: Hobbit
-                          pointsEarned:
+                          last_week:
                             type: integer
                             minimum: 0
-                  points:
-                    description: A number of points earned by vip members via various channels split by dates
-                    type: object
-                    properties:
-                      online:
-                        description: Spent online
-                        example: {"2018-07-01": 106, "2018-07-02": 451}
-                        type: object
-                        additionalProperties:
-                          type: integer
-                      offline:
-                        description: Spent offline
-                        example: {"2018-07-01": 106, "2018-07-02": 451}
-                        type: object
-                        additionalProperties:
-                          type: integer
-                      other:
-                        description: Spent by other mean
-                        example: {"2018-07-01": 106, "2018-07-02": 451}
-                        type: object
-                        additionalProperties:
-                          type: integer
-                  spent_points:
-                    description: A number of points spent by vip members via various channels, split by dates
-                    type: object
-                    properties:
-                      online:
-                        description: Online redeem
-                        example: {"2018-07-01": 106, "2018-07-02": 451}
-                        type: object
-                        additionalProperties:
-                          type: integer
-                      offline:
-                        description: Offline redeem, on the counter
-                        example: {"2018-07-01": 106, "2018-07-02": 451}
-                        type: object
-                        additionalProperties:
-                          type: integer
-                      other:
-                        description: Redeemed by other mean
-                        example: {"2018-07-01": 106, "2018-07-02": 451}
-                        type: object
-                        additionalProperties:
-                          type: integer
-                  signups:
-                    description: A number of customers joined the program, split by dates
-                    example:
-                      {"2018-07-01": 0, "2018-07-02": 0}
-                    type: object
-                    additionalProperties:
-                      type: integer
-                  total_members:
-                    description: Shows the total number of members in the program
-                    type: integer
-                    minimum: 0
-                  member_growth:
-                    description: Shows how many new members joined the program recently
-                    type: object
-                    properties:
-                      last_week:
-                        type: integer
-                        minimum: 0
-                        example: 10
-                      last_month:
-                        type: integer
-                        minimum: 0
-                        example: 166
-                  best_performing_stores:
-                    description: Shows top-5 shops where customers earn the most points in a given time frame
-                    type: object
-                    additionalProperties:
-                      type: integer
-                    example: {"Central Airport kiosk": 681, "Grand Plaza Store":103}
-                  best_performing_members:
-                    description: Shows top-5 customers who earned the most points in a given time frame
-                    type: object
-                    additionalProperties:
-                      type: integer
-                    example: {"Gavin Yuu":190945, "Abigail French": 150711}
+                            example: 10
+                          last_month:
+                            type: integer
+                            minimum: 0
+                            example: 166
+                      best_performing_stores:
+                        description: Shows top-5 shops where customers earn the most points in a given time frame
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            storeName:
+                              type: string
+                            pointsEarned:
+                              type: integer
+                          example:
+                            storeName: 'Central Airport kiosk'
+                            pointsEarned: 103
+                      best_performing_members:
+                        description: Shows top-5 customers who earned the most points in a given time frame
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            memberName:
+                              type: string
+                            pointsEarned:
+                              type: integer
+                          example:
+                            memberName: 'John Snow'
+                            pointsEarned: 55
+
   /api/v4/admin/loyalty/brands/{brand}/vip/rewards/:
     parameters:
       - $ref: '../../shared/components.parameters.yaml#/brand'
@@ -151,9 +180,6 @@ paths:
       tags:
         - 'rewards management'
       summary: Get all rewards available for the brand
-      x-implementation:
-        class: \Namespaced\Controller\Class
-        method: index
       description: You can combine any of these parameters
       parameters:
         - name: page
@@ -247,9 +273,6 @@ paths:
       tags:
         - 'rewards management'
       summary: Create a new tier-based reward
-      x-implementation:
-        class: \Namespaced\Controller\Class
-        method: store
       requestBody:
         required: true
         content:
@@ -267,11 +290,9 @@ paths:
                 - name
                 - type
             example:
-              {
-                "type": "qr",
-                "name": "Some welcome reward",
-                "payload": "Smile to the cashier in order to get a discount"
-              }
+              'type': 'qr'
+              'name': 'Some welcome reward'
+              'payload': 'Smile to the cashier in order to get a discount'
       responses:
         202:
           description: Request accepted (though execution can be delayed)
