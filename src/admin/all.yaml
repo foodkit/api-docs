@@ -11,3 +11,12 @@ info:
     backgroundColor: "#FFFFFF"
     altText: "Foodkit logo"
 paths:
+  # Use this file to set a list of files to merge in
+  - $ref: "./loyalty/vip.yaml"
+  - $ref: "./brands/alerts.yaml"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: string

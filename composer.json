@@ -1,7 +1,7 @@
 {
     "name": "ginja-th/api-docs",
     "description": "API documentation repository",
-    "license": "Proprietary",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Dmitry Lezhnev",
@@ -9,6 +9,11 @@
         }
     ],
     "require": {
-        "hkarlstrom/openapi-reader": "^0.2.2"
+        "symfony/console": "^4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Scripts\\": "scripts/"
+        }
     }
 }
