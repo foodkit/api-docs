@@ -37,10 +37,13 @@ class MergeCommand extends Command
             $this->checkCliLinks($output);
 
             $files = $this->getReferencesFromGivenInputSpec($input->getArgument('input'), $output);
-            $this->validateOpenAPISpecFiles($files, $output);
-            $tmpFiles = $this->resolveReferencesInFiles($files, $output);
-            $this->mergeReferencedFilesIntoOutputSpec($tmpFiles, $input->getArgument('output'), $input->getArgument('input'), $output);
-            $this->cleanupTmpFiles($tmpFiles, $output);
+
+            if ($files) {
+                $this->validateOpenAPISpecFiles($files, $output);
+                $tmpFiles = $this->resolveReferencesInFiles($files, $output);
+                $this->mergeReferencedFilesIntoOutputSpec($tmpFiles, $input->getArgument('output'), $input->getArgument('input'), $output);
+                $this->cleanupTmpFiles($tmpFiles, $output);
+            }
 
             $output->writeln('✅ Done');
         } catch (\Throwable $e) {
@@ -91,17 +94,21 @@ class MergeCommand extends Command
             throw new \Exception("$specRealPath has unexpected JSON structure");
         }
 
-        foreach ($specJSON['paths'] as $path) {
-            if (isset($path['$ref'])) {
+        if (!$specJSON['paths']) {
+            $output->writeln("No references found");
+        } else {
+            foreach ($specJSON['paths'] as $path) {
+                if (isset($path['$ref'])) {
 
-                $referencedFile = realpath($specBasePath . "/" . $path['$ref']);
-                if (!$referencedFile || !is_readable($referencedFile)) {
-                    throw new \Exception("$referencedFile is not available");
-                } else {
-                    $output->writeln("$referencedFile\tFOUND");
+                    $referencedFile = realpath($specBasePath . "/" . $path['$ref']);
+                    if (!$referencedFile || !is_readable($referencedFile)) {
+                        throw new \Exception("$referencedFile is not available");
+                    } else {
+                        $output->writeln("$referencedFile\tFOUND");
+                    }
+
+                    $files[] = $referencedFile;
                 }
-
-                $files[] = $referencedFile;
             }
         }
         $output->write("\n\n");

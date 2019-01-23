@@ -1,0 +1,21 @@
+openapi: 3.0.2
+info:
+  title: Storefront API
+  version: 0.0.1
+  contact:
+    name: Dmitry Lezhnev
+    url: /
+    email: dmitry@foodkit.io
+  x-logo:
+    url: "https://static.wixstatic.com/media/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.png/v1/fill/w_294,h_110,al_c,q_80,usm_0.66_1.00_0.01/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.webp"
+    backgroundColor: "#FFFFFF"
+    altText: "Foodkit logo"
+paths:
+  # Use this file to set a list of files to merge in
+  # - $ref: "./loyalty/vip.yaml"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: string
