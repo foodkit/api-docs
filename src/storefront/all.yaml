@@ -12,7 +12,7 @@ info:
     altText: "Foodkit logo"
 paths:
   # Use this file to set a list of files to merge in
-  # - $ref: "./loyalty/vip.yaml"
+  - $ref: "./inventory/products.yaml"
 components:
   securitySchemes:
     bearerAuth:
