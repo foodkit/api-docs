@@ -1,0 +1,89 @@
+openapi: 3.0.2
+info:
+  title: Storefront inventory API
+  description: Here you'll find documented API endpoints to access inventory's products. This API is used on a customer part of the system.
+  version: 0.0.1
+  contact:
+    name: Dmitry Lezhnev
+    url: /
+    email: dmitry@foodkit.io
+paths:
+  /api/v4/storefront/inventory/brands/{brand}/products/pages:
+    parameters:
+      - $ref: '../../shared/components.parameters.yaml#/brand'
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - 'Products'
+      summary: Get all products, paginated
+      description: This will return all products regardless of visibility settings
+      parameters:
+        - name: page
+          in: query
+          description: set the page to return
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '403':
+          $ref: '../../shared/components.responses.yaml#/Unauthorized'
+        '500':
+          $ref: '../../shared/components.responses.yaml#/RuntimeFailure'
+        '200':
+          description: Collection of products
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    minimum: 0
+                    description: the amount of all found items
+                  per_page:
+                    type: integer
+                    minimum: 1
+                    description: the amount of items displayed at once
+                  current_page:
+                    type: integer
+                    minimum: 1
+                    description: the page to show
+                  last_page:
+                    type: integer
+                    minimum: 1
+                    description: the last page available
+                  next_page_url:
+                    type: string
+                    format: url
+                    description: The url pointing to the next page
+                    nullable: true
+                  prev_page_url:
+                    type: string
+                    format: url
+                    description: The url pointing to the next page
+                    nullable: true
+                  from:
+                    type: integer
+                    minimum: 0
+                    description: The number of the first item on the page
+                  to:
+                    type: integer
+                    minimum: 0
+                    description: The number of the last item on the page
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '../../shared/Inventory/Product.yaml#/Product'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: string
