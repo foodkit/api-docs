@@ -1,0 +1,51 @@
+RewardBase:
+  type: object
+  properties:
+    name:
+      type: string
+      minimum: 1
+      description: Name of the reward, like `Free coffee to go`
+    description:
+      type: string
+      description: ???
+    type:
+      type: string
+      enum:
+        - qr
+        - barcode
+        - link
+        - text
+      description: This defines how the reward can be redeemed
+    max_redemptions_per_member:
+      type: integer
+      minimum: 0
+      nullable: true
+      description: How many times a qualified customer can redeem this reward
+    payload:
+      type: string
+      nullable: true
+      description: Pass the reward single payload. This is not compatible with `redeemable_source_id`.
+    redeemable_source_id:
+      type: integer
+      nullable: true
+      description: Pass the `id` of another reward to share its redeemables. This is no compatible with `payload`.
+    small_image_src:
+      type: string
+      nullable: true
+      format: imageIdentifier
+      description: Provide an image identifier
+    large_image_src:
+      type: string
+      nullable: true
+      format: imageIdentifier
+      description: Provide an image identifier
+    valid_from:
+      type: string
+      format: date
+      nullable: true
+      description: A date must be lower than `valid_to`. This must be provided along with `valid_to`.
+    valid_to:
+      type: string
+      format: date
+      nullable: true
+      description: A date must be higher than `valid_from`. This must be provided along with `valid_from`.

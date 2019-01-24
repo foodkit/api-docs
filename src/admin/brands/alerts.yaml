@@ -1,0 +1,58 @@
+openapi: 3.0.2
+info:
+  title: Admin Alerts API
+  version: 0.0.1
+  contact:
+    name: Dmitry Lezhnev
+    url: /
+    email: dmitry@foodkit.io
+  x-logo:
+    url: "https://static.wixstatic.com/media/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.png/v1/fill/w_294,h_110,al_c,q_80,usm_0.66_1.00_0.01/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.webp"
+    backgroundColor: "#FFFFFF"
+    altText: "Foodkit logo"
+paths:
+  /api/v4/admin/brands/{brand}/alerts:
+    get:
+      summary: Returns a list of currently active alerts for various dashboards
+      tags:
+        - 'Get dashboard alerts'
+      operationId: admin.brands.alert
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+            default: main
+            enum:
+              - main
+              - vip
+          required: false
+          description: type of the dashboard to get alerts for
+      responses:
+        200:
+          description: Return all analytical numbers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      example: main
+                    title:
+                      type: string
+                      example: New Dashboard Available
+                    description:
+                      type: string
+                    link_text:
+                      type: string
+                    link_url:
+                      type: string
+                    image:
+                      type: object
+                      properties:
+                        hero:
+                          type: string
+                          format: url

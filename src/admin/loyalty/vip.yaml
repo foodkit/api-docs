@@ -1,0 +1,328 @@
+openapi: 3.0.2
+info:
+  title: Sample API spec for VIP Rewards management
+  description: |
+    This is a sample API documentation. Proof of a concept edition.
+  version: 0.0.1
+  contact:
+    name: Dmitry Lezhnev
+    url: /
+    email: dmitry@foodkit.io
+  x-logo:
+    url: "https://static.wixstatic.com/media/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.png/v1/fill/w_294,h_110,al_c,q_80,usm_0.66_1.00_0.01/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.webp"
+    backgroundColor: "#FFFFFF"
+    altText: "Foodkit logo"
+paths:
+  /api/v4/admin/loyalty/brands/{brand}/vip/analytics:
+    parameters:
+      - $ref: '../../shared/components.parameters.yaml#/brand'
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - 'rewards management'
+      summary: Build a report with rewards usage numbers. Date range is inclusive.
+      description: |
+        # title
+        `code`
+      parameters:
+        - name: start
+          in: query
+          required: true
+          schema:
+            type: date
+          example: "2018-07-01"
+        - name: end
+          in: query
+          required: true
+          schema:
+            type: date
+          example: "2018-07-02"
+      responses:
+        '403':
+          $ref: '../../shared/components.responses.yaml#/Unauthorized'
+        '500':
+          $ref: '../../shared/components.responses.yaml#/RuntimeFailure'
+        200:
+          description: Get all analytical numbers
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      tierMembers:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            tierName:
+                              type: string
+                              example: Piccollo
+                            members:
+                              type: integer
+                              minimum: 0
+                      tiers:
+                        description: Points earned by members on each tier
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: date
+                              example: '2018-05-01'
+                            tiers:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  tierName:
+                                    type: string
+                                    example: Hobbit
+                                  pointsEarned:
+                                    type: integer
+                                    minimum: 0
+                      points:
+                        description: A number of points earned by vip members via various channels split by dates
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: date
+                              example: "2018-05-01"
+                            online:
+                              type: integer
+                            offline:
+                              type: integer
+                            other:
+                              type: integer
+                      spent_points:
+                        description: A number of points spent by vip members via various channels, split by dates
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: date
+                              example: "2018-05-01"
+                            online:
+                              type: integer
+                            offline:
+                              type: integer
+                            other:
+                              type: integer
+                      signups:
+                        description: A number of customers joined the program, split by dates
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: date
+                              example: "2018-05-01"
+                            signups:
+                              type: integer
+                      total_members:
+                        description: Shows the total number of members in the program
+                        type: integer
+                        minimum: 0
+                      member_growth:
+                        description: Shows how many new members joined the program recently
+                        type: object
+                        properties:
+                          last_week:
+                            type: integer
+                            minimum: 0
+                            example: 10
+                          last_month:
+                            type: integer
+                            minimum: 0
+                            example: 166
+                      best_performing_stores:
+                        description: Shows top-5 shops where customers earn the most points in a given time frame
+                        type: object
+                        properties:
+                          points:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                storeName:
+                                  type: string
+                                points:
+                                  type: integer
+                              example:
+                                storeName: 'Central Airport kiosk'
+                                points: 103
+                      best_performing_members:
+                        description: Shows top-5 customers who earned the most points in a given time frame
+                        type: object
+                        properties:
+                          points:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                memberName:
+                                  type: string
+                                points:
+                                  type: integer
+                              example:
+                                memberName: 'John Snow'
+                                points: 55
+
+  /api/v4/admin/loyalty/brands/{brand}/vip/rewards/:
+    parameters:
+      - $ref: '../../shared/components.parameters.yaml#/brand'
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - 'rewards management'
+      summary: Get all rewards available for the brand
+      description: You can combine any of these parameters
+      parameters:
+        - name: page
+          in: query
+          description: this parameter enables paginated output, the value addresses certain page
+          schema:
+            type: integer
+            minimum: 1
+        - name: state
+          in: query
+          required: false
+          description: allows to filter rewards by the type
+          schema:
+            type: string
+            enum:
+              - active
+              - inactive
+              - all
+        - name: query
+          in: query
+          required: false
+          description: text query to search for
+          schema:
+            type: string
+        - name: has_redeemables
+          in: query
+          required: false
+          description: filter to only to those with redeemables
+          schema:
+            type: boolean
+          example: true
+      responses:
+        '403':
+          $ref: '../../shared/components.responses.yaml#/Unauthorized'
+        '500':
+          $ref: '../../shared/components.responses.yaml#/RuntimeFailure'
+        '200':
+          description: Collection of rewards
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              example:
+                data:
+                  id: 34
+                  description: Sample reward
+                  expires_at: null
+                  images:
+                    small:
+                      32x32: 'https://host.com/a.jpg'
+                      64x64: 'https://host.com/a.jpg'
+                    large:
+                      375x232: 'https://host.com/a.jpg'
+                      750x464: 'https://host.com/a.jpg'
+                  name: Sample name
+                  status: null
+                  type: qr
+                  max_redemptions_per_member: 100
+                  loyalty_vip_tier_id: 8
+                  redeemable_source_id: null
+                  valid_from: null
+                  valid_to: null
+                  loyalty_vip_member_id: null
+                  is_parent_reward: false
+                  is_milestone_reward: false
+                  milestone: null
+                  is_visit_reward: false
+                  visits: null
+                  reward_type: tier-based
+                  redemptions:
+                    redeemed: 22
+                    available: 1000
+                  is_enabled: false
+                  created_at: '2018-06-20 04:30:11'
+                  updated_at: '2019-01-10 13:46:34'
+                  member_redemptions: null
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: 'components.schema.yaml#/RewardBase'
+  /api/v4/admin/loyalty/brands/{brand}/vip/rewards/tier-based:
+    parameters:
+      - $ref: '../../shared/components.parameters.yaml#/brand'
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - 'rewards management'
+      summary: Create a new tier-based reward
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: 'components.schema.yaml#/RewardBase'
+                - type: object
+                  properties:
+                    loyalty_vip_tier_id:
+                      type: integer
+                      minimum: 1
+                      description: "`id` of a revenue tier"
+              required:
+                - name
+                - type
+            example:
+              'type': 'qr'
+              'name': 'Some welcome reward'
+              'payload': 'Smile to the cashier in order to get a discount'
+      responses:
+        202:
+          description: Request accepted (though execution can be delayed)
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+              example:
+                id: abc-123
+        422:
+          $ref: '../../shared/components.responses.yaml#/InvalidInputResponse'
+        403:
+          $ref: '../../shared/components.responses.yaml#/Unauthorized'
+        500:
+          $ref: '../../shared/components.responses.yaml#/RuntimeFailure'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: string

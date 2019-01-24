@@ -1,6 +1,6 @@
 {
   "name": "api-docs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Documentation for the Foodkit API.",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,10 @@
   "homepage": "https://github.com/foodkit/api-docs#readme",
   "dependencies": {
     "aglio": "^2.3.0",
-    "dredd": "^5.1.7"
+    "dredd": "^5.1.7",
+    "redoc-cli": "^0.7.0",
+    "speccy": "^0.8.7",
+    "swagger-cli": "^2.2.1",
+    "yamljs": "^0.3.0"
   }
 }
