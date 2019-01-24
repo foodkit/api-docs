@@ -1,0 +1,19 @@
+{
+    "name": "ginja-th/api-docs",
+    "description": "API documentation repository",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Dmitry Lezhnev",
+            "email": "dmitry@foodkit.io"
+        }
+    ],
+    "require": {
+        "symfony/console": "^4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Scripts\\": "scripts/"
+        }
+    }
+}

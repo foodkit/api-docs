@@ -1,0 +1,168 @@
+openapi: 3.0.2
+Product:
+  type: object
+  properties:
+    id:
+      type: integer
+      minimum: 1
+    brand_id:
+      type: integer
+      minimum: 1
+      description: tenant ID of the product
+    menu_branch_id:
+      type: integer
+      minimum: 1
+      description: Which branch's menu this products belongs to (A product can belong to various branches within the tenant)
+    name:
+      type: string
+      example: 'Candle Numeral 0 pink'
+    price:
+      type: integer
+      minimum: 0
+      description: A price in least significant units (ie cents)
+    before_sale_price:
+      type: integer
+      minimum: 0
+      nullable: true
+      description: A price before discounts applied
+    description:
+      type: string
+      example: 'Pink candle with number zero'
+    full_description:
+      type: string
+      example: 'Pink candle with number zero'
+    order:
+      type: integer
+      minimum: 0
+      description: Sorting order, used to arrange products in a certain sequence
+    category:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+          minimum: 0
+        name:
+          type: string
+          example: 'Soft drinks'
+        name_th:
+          type: string
+          nullable: true
+        category_image_src:
+          type: string
+          format: url
+          nullable: true
+          example: 'https://images.snpfood.com/image/upload/q_auto/v1/brands/15/inventory/products/4941'
+        order:
+          type: integer
+          minimum: 0
+          description: Sorting order
+        code:
+          type: integer
+          minimum: 0
+          description: A unique code of the category ???
+    images:
+      type: object
+      properties:
+        original:
+          type: string
+          format: url
+          example: 'https://images.snpfood.com/image/upload/q_auto/v1/brands/15/inventory/products/4941'
+        full_size:
+          type: string
+          format: url
+          example: 'https://images.snpfood.com/image/upload/q_auto/v1/brands/15/inventory/products/4941'
+        thumbnail:
+          type: string
+          format: url
+          example: 'https://images.snpfood.com/image/upload/q_auto/v1/brands/15/inventory/products/4941'
+        thumbnail_retina:
+          type: string
+          format: url
+          example: 'https://images.snpfood.com/image/upload/q_auto/v1/brands/15/inventory/products/4941'
+    extras:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            minimum: 1
+          name:
+            type: string
+            example: 'Choose your Pie'
+          min:
+            type: integer
+            minimum: 1
+            description: The minimum number that can be attached to a product upon a purchase
+          max:
+            type: integer
+            minimum: 1
+            description: The miximum number that can be attached to a product upon a purchase
+    extra_items:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            minimum: 1
+          name:
+            type: string
+            example: 'Chicken Pie'
+          extra_id:
+            type: integer
+            minimum: 1
+          price:
+            type: integer
+            minimum: 0
+    is_enabled:
+      type: boolean
+      description: If this product is allowed for purchasing
+    has_comments:
+      type: boolean
+      description: If there are comments attached to the product ???
+    #cart_limit: null
+    #published_at: null
+    #unpublished_at: null
+    is_published_on_web:
+      type: boolean
+      description: If this product allowed to be purchased via Web client
+    is_published_on_mobile:
+      type: boolean
+      description: If this product allowed to be purchased via Mobile client
+    is_available_for_pickup:
+      type: boolean
+      description: If this product allowed to be picked up from the venue
+    is_available_for_delivery:
+      type: boolean
+      description: If this product allowed to be delivered to the customer
+    #minimum_preorder_days: null
+    #tags: []
+    code:
+      type: string
+      description: A unique vendor's code for the product
+      example: 'P-11'
+    is_sku_only:
+      type: boolean
+      description: ???
+    #variants: null
+    #type: null
+    locales:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          name:
+            type: string
+          description:
+            type: string
+      example:
+        en: {name: 'Candle Numeral 0 pink', description: 'Pink candle with number zero'}
+        th: {name: 'เทียนวันเกิดเลข 0 สีชมพู', description: 'เทียนตัวเลข 0 ขอบชมพู'}
+    availability:
+      type: string
+      enum:
+        - available
+        - unavailable
+      example: available

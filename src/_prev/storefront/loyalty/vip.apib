@@ -1,14 +1,14 @@
 ### VIP Program [/api/v4/storefront/brands/{brand_id}/loyalty/vip]
 
   + Parameters
-    + brand_id: 132 (number)
+    + brand_id: 5 (number)
 
 #### Get loyalty program details [GET /api/v4/storefront/brands/{brand_id}/loyalty/vip]
 
 Retrieve the details of the brand's loyalty program (if it exists). If there is no loyalty program, you'll simply get `null`.
 
   + Parameters
-    + brand_id: 132 (number)
+    + brand_id: 5 (number)
 
 + Response 200 (application/json)
     + Attributes
@@ -19,8 +19,8 @@ Retrieve the details of the brand's loyalty program (if it exists). If there is 
 Registers a customer for the VIP program. If they're already a member, this will update their membership details.
 
   + Parameters
-    + brand_id: 465 (number)
-    + customer_id: 71713 (number)
+    + brand_id: 5 (number)
+    + customer_id: 26871 (number)
 
 + Request (application/json)
 
@@ -36,13 +36,13 @@ Registers a customer for the VIP program. If they're already a member, this will
 
 #### Deregister customer from VIP program [DELETE /api/v4/storefront/brands/{brand_id}/loyalty/vip/customers/{customer_id}]
 
-Removes a customer's VIP membership. 
+Removes a customer's VIP membership.
 
 *WARNING*: this is irreverisble. Use this endpoint with care.
 
   + Parameters
-    + brand_id: 465 (number)
-    + customer_id: 71713 (number)
+    + brand_id: 5 (number)
+    + customer_id: 26871 (number)
 
 + Response 201 (application/json)
 
@@ -51,8 +51,8 @@ Removes a customer's VIP membership.
 Use this endpoint to check the customer's VIP status. If the customer _is_ a member, you'll get the number of membership points.
 
   + Parameters
-    + brand_id: 465 (number)
-    + customer_id: 71713 (number)
+    + brand_id: 5 (number)
+    + customer_id: 26871 (number)
 
 + Response 200 (application/json)
     + Attributes
@@ -63,8 +63,8 @@ Use this endpoint to check the customer's VIP status. If the customer _is_ a mem
 Use this endpoint when a consumer wants to redeem a coupon. If the coupon has already been redeemed (and can only be redeemed once), you'll get the same response for each call.
 
   + Parameters
-    + brand_id: 465 (number)
-    + customer_id: 1245 (number)
+    + brand_id: 5 (number)
+    + customer_id: 26871 (number)
     + reward_id: 641 (number)
 
 + Response 200 (application/json)
@@ -98,6 +98,7 @@ Use this endpoint when a consumer wants to redeem a coupon. If the coupon has al
 - next_tier (TierWithRewards)
 - next_tier_points: 1000 (number)
 - customer (Customer)
+- qr: `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAANTElEQVR4Xu2dTQgkRxXH/3tQInEJE...K5CYII=` (string)
 
 #### Program (object)
 

@@ -1,0 +1,27 @@
+Error:
+  type: object
+  properties:
+    code:
+      type: string
+    message:
+      type: string
+  required:
+    - code
+    - message
+  example:
+    code: ERR-100
+    message: Server wasn't able to serve this request
+InvalidInputError:
+  type: object
+  properties:
+    messages:
+      type: object
+      description: Keys are input field which were found invalid, values are validation messages
+      additionalProperties:
+        type: array
+        items:
+          type: string
+  required:
+    - messages
+  example:
+    email: ["given email is invalid"]
