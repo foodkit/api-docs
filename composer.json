@@ -1,11 +1,15 @@
 {
-    "name": "ginja-th/api-docs",
+    "name": "foodkit/api-docs",
     "description": "API documentation repository",
     "license": "proprietary",
     "authors": [
         {
             "name": "Dmitry Lezhnev",
             "email": "dmitry@foodkit.io"
+        },
+        {
+            "name": "Corey Mcmahon",
+            "email": "corey@foodkit.io"
         }
     ],
     "require": {

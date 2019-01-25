@@ -1,4 +1,5 @@
-build/*.apib
+build/
+!build/.gitkeep
 node_modules/
 tmp/
 vendor/

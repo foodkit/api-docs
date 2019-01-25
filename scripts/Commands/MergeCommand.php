@@ -17,6 +17,7 @@ class MergeCommand extends Command
     protected static $defaultName = 'merge';
 
     # Cli links
+    protected $nodeJs = null;
     protected $swagger_cli = __DIR__ . "/../../node_modules/.bin/swagger-cli";
     protected $speccy = __DIR__ . "/../../node_modules/.bin/speccy";
     protected $yaml2json = __DIR__ . "/../../node_modules/.bin/yaml2json";
@@ -28,12 +29,15 @@ class MergeCommand extends Command
             ->setDescription('Merges a multiple spec files into one')
             ->setHelp('This command reads a template spec files and resolves all "paths" references')
             ->addArgument('input', InputArgument::REQUIRED, 'Main OpenAPI spec YAML file')
-            ->addArgument('output', InputArgument::REQUIRED, 'Merged spec YAML file');
+            ->addArgument('output', InputArgument::REQUIRED, 'Merged spec YAML file')
+            ->addArgument('node', InputArgument::OPTIONAL, 'Path to node executable');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
+            $this->nodeJs = $input->getArgument('node');
+
             $this->checkCliLinks($output);
 
             $files = $this->getReferencesFromGivenInputSpec($input->getArgument('input'), $output);
@@ -125,6 +129,10 @@ class MergeCommand extends Command
     {
         $problemsDetected = false;
         $tools = [$this->swagger_cli, $this->speccy, $this->yaml2json];
+        if ($this->nodeJs) {
+            $tools[] = $this->nodeJs;
+        }
+
         foreach ($tools as $tool) {
             $toolPath = realpath($tool);
 
@@ -156,7 +164,7 @@ class MergeCommand extends Command
         $output->writeln("🔦 Validate YAML Files");
         foreach ($files as $file) {
             $fileRealPath = realpath($file);
-            exec("$this->swagger_cli validate $fileRealPath");
+            $this->execNode("$this->swagger_cli validate $fileRealPath");
             $output->writeln("$fileRealPath\tVALID");
         }
         $output->write("\n\n");
@@ -178,7 +186,7 @@ class MergeCommand extends Command
         foreach ($files as $file) {
             $fileRealPath = realpath($file);
             $fileTmpPath = tempnam(sys_get_temp_dir(), 'yaml_');
-            exec("$this->speccy resolve $fileRealPath -o $fileTmpPath");
+            $this->execNode("$this->speccy resolve $fileRealPath -o $fileTmpPath");
             $output->writeln("$fileRealPath\tRESOLVED DEPENDENCIES");
             $tmpFilesBuffer[] = $fileTmpPath;
         }
@@ -202,7 +210,7 @@ class MergeCommand extends Command
         # 1 Convert YAML=>JSON
         foreach ($specFiles as $i => $specFile) {
             $fileJsonPath = tempnam(sys_get_temp_dir(), 'json_');
-            exec("$this->yaml2json $specFile > $fileJsonPath");
+            $this->execNode("$this->yaml2json $specFile > $fileJsonPath");
             unlink($specFile);
             $specFiles[$i] = $fileJsonPath;
         }
@@ -230,5 +238,17 @@ class MergeCommand extends Command
         $output->writeln("<info>" . realpath($outputPath) . "\tMERGED</info>");
 
         $output->write("\n\n");
+    }
+
+    /**
+     * @param string $command
+     * @return string
+     */
+    private function execNode(string $command): string
+    {
+        if ($this->nodeJs) {
+            $command = "{$this->nodeJs} {$command}";
+        }
+        return exec($command);
     }
 }
