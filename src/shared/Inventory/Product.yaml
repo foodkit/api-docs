@@ -58,9 +58,9 @@ Product:
           minimum: 0
           description: Sorting order
         code:
-          type: integer
-          minimum: 0
-          description: A unique code of the category ???
+          type: string
+          nullable: true
+          description: A unique code of the category, external public identifier from a 3rd party system
     images:
       type: object
       properties:
@@ -121,10 +121,19 @@ Product:
       description: If this product is allowed for purchasing
     has_comments:
       type: boolean
-      description: If there are comments attached to the product ???
-    #cart_limit: null
-    #published_at: null
-    #unpublished_at: null
+      description: A customer can provided a specific comment related to this product. (ie "no spice please")
+    cart_limit:
+      type: integer
+      minimum: 0
+      description: Max amount of this products allowed to add. 0 - means no limit.
+    published_at:
+      type: string
+      format: timestamp
+      description: When a product should appear to a customer
+    unpublished_at:
+      type: string
+      format: timestamp
+      description: When a product should disappear from a customer's menu
     is_published_on_web:
       type: boolean
       description: If this product allowed to be purchased via Web client
@@ -137,17 +146,28 @@ Product:
     is_available_for_delivery:
       type: boolean
       description: If this product allowed to be delivered to the customer
-    #minimum_preorder_days: null
-    #tags: []
+    minimum_preorder_days:
+      type: integer
+      minimum: 0
+      description: The number of days in advance a restaurant needs to deliver/cook
+    tags:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            minimum: 1
+          tag:
+            type: string
+            example: 'Desserts'
     code:
       type: string
       description: A unique vendor's code for the product
       example: 'P-11'
     is_sku_only:
       type: boolean
-      description: ???
-    #variants: null
-    #type: null
+      description: If true, will not appear on customer menu, but can be purchased through a customer service dashboard
     locales:
       type: object
       additionalProperties:
@@ -165,4 +185,13 @@ Product:
       enum:
         - available
         - unavailable
+        - unknown
       example: available
+    variants:
+      type: string
+      nullable: true
+      deprecated: true
+    type:
+      type: string
+      nullable: true
+      deprecated: true
