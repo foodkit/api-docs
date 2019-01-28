@@ -75,12 +75,9 @@ paths:
                     minimum: 0
                     description: The number of the last item on the page
                   data:
-                    type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: '../../shared/Inventory/Product.yaml#/Product'
+                    type: array
+                    items:
+                      $ref: '../../shared/Inventory/Product.yaml#/Product'
 components:
   securitySchemes:
     bearerAuth:
