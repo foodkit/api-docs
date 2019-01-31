@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>%%PAGE_TITLE%%</title>
+    <!-- needed for adaptive design -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+
+    <!--
+    ReDoc doesn't change outer page styles
+    -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        @media screen and (max-width: 50rem) {
+          .menu-content {
+            background-color: #3B3B47 !important;
+          }
+          .menu-content>div:first-child {
+            background-color:  #337ab7;
+          }
+        }
+        div[role="search"] {
+          padding: 10px 0;
+        }
+        div[role="search"] input {
+          border-bottom: 1px solid #FFFFFF;
+        }
+        .search-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          color: #96A4AA;
+        }
+        .search-input::-moz-placeholder { /* Firefox 19+ */
+          color: #96A4AA;
+        }
+        .search-input:-ms-input-placeholder { /* IE 10+ */
+          color: #96A4AA;
+        }
+        .search-input:-moz-placeholder { /* Firefox 18- */
+          color: #96A4AA;
+        }
+        .scrollbar-container>div>a {
+          visibility: hidden;
+        }
+        .api-content h5 {
+          font-weight: 800;
+          letter-spacing: 1px;
+          font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+<redoc></redoc>
+<script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+<script>
+  Redoc.init('%%OPENAPI_SPEC_JSON%%', {
+    "theme": {    
+      "colors": {
+        "primary": {
+          "main": "#3581C1"
+        },
+        "success": {
+          "main": "#22E5AE"
+        },
+        "error": {
+          "main": "#E5323B"
+        },
+        "text": {
+          "primary": "#414141",
+          "secondary": "#414141"
+        },
+        "http": {
+          "get": "#6ec5ab",
+          "put": "#a9b4bf",
+          "post": "#6c96a1",
+          "delete": "#c05f68"
+        }
+      },
+      "typography": {
+        "fontFamily": "Lato, sans-serif",
+        "headings": {
+          "fontFamily": "Lato, sans-serif",
+          "fontWeight": "200",
+        },
+      },
+      "menu": {
+        "backgroundColor": "#3B3B47",
+        "textColor": "#ffffff"
+      },
+    }
+  });
+</script>
+</body>
+</html>

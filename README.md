@@ -49,8 +49,14 @@ components:
 
 Now to resolve dependencies and prepare a single file, use:
 
-`scripts/run.php merge template.yaml output.merged.yaml`
+`scripts/run.php merge template.yaml merged.yaml`
 
-After that you can create a distributable HTML file:
+After that you can create a distributable HTML file by reusing a template `src/template.html`:
 
-`redoc-cli bundle output.merged.yaml -o output.merged.html`
+- `cp ./output.merged.yaml ./public` - copy merged file to a public folder
+- `cp ./src/template.html ./public/index.html` - copy a template to the same folder
+- `sed -i -e 's/%%PAGE_TITLE%%/TITLE/g' index.html` - replace the page title in the copied template to `TITLE`
+- `sed -i -e 's/%%OPENAPI_SPEC_JSON%%/merged.yaml/g' index.html` - set the link to openapi spec to a new merged file `merged.yaml`
+
+That's it. Now you can allow public access to the `index.html` file.
+
