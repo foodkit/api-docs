@@ -30,6 +30,50 @@ paths:
           $ref: '../../shared/components.responses.yaml#/Unauthorized'
         '404':
           $ref: '../../shared/components.responses.yaml#/NotFound'
+        '400':
+          description: Failed token lookup (expired)
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - expired
+                      - not_found
+                    example: "expired"
+                  brand:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        example: 52
+                      logo_image_src:
+                        type: string
+                        example: "https://cdn.foodkitapp.io/brands/51/logo_image_src.100x100.jpg"
+                      customer_service_phone_number:
+                        type: string
+                        example: '8020202020'
+                      locales:
+                        type: object
+                        properties:
+                          en:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                example: "McDonald's"
+                          th:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                example: "โดนัลด์"
         '200':
           description: Payment link request information.
           headers:
