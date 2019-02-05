@@ -31,7 +31,7 @@ paths:
         '404':
           $ref: '../../shared/components.responses.yaml#/NotFound'
         '400':
-          description: Failed token lookup (expired)
+          description: Failed token lookup
           headers:
             X-Response-Id:
               $ref: '../../shared/components.headers.yaml#/xResponseId'
@@ -42,6 +42,7 @@ paths:
                 properties:
                   status:
                     type: string
+                    description: Explains what went wrong. Usually something is wrong with the token
                     enum:
                       - expired
                       - not_found
