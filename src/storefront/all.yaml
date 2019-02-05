@@ -8,7 +8,7 @@ info:
     email: dmitry@foodkit.io
   x-logo:
     url: "https://cdn.foodkitapp.io/foodkitio/foodkit-logo-white-2x.png"
-    backgroundColor: "#FFFFFF"
+    backgroundColor: "#337ab7"
     altText: "Foodkit logo"
 paths:
   # Use this file to set a list of files to merge in
