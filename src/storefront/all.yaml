@@ -13,6 +13,7 @@ info:
 paths:
   # Use this file to set a list of files to merge in
   - $ref: "./inventory/products.yaml"
+  - $ref: "./payments/links.yaml"
 components:
   securitySchemes:
     bearerAuth:

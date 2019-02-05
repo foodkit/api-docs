@@ -1,0 +1,266 @@
+openapi: 3.0.2
+info:
+  title: Payment links API
+  description: Payment links provide a mechanism for securely capturing credit card information from customers when an (unpaid) order has already been created. The customer will use the link to complete the payment, updating the order status to "paid."
+  version: 0.0.1
+  contact:
+    name: Corey Mcmahon
+    url: /
+    email: corey@foodkit.io
+paths:
+  /api/v4/payments/brands/{brand}/links/{token}:
+    parameters:
+      - $ref: '../../shared/components.parameters.yaml#/brand'
+      - in: path
+        name: token
+        required: true
+        schema:
+          type: string
+          minimum: 32
+        description: The unique "token" parameter that identifies the payment link. This is non-guessable and randomly generated.
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - 'Payments'
+      summary: Retrieve a payment link
+      description: If the payment link token is valid the endpoint will return the necessary information for the payment link client to proceed with capturing payment information (e.g credit card details) from the consumer.
+      responses:
+        '403':
+          $ref: '../../shared/components.responses.yaml#/Unauthorized'
+        '404':
+          $ref: '../../shared/components.responses.yaml#/NotFound'
+        '200':
+          description: Payment link request information.
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      brand:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            minimum: 1
+                            example: 52
+                          logo_image_src:
+                            type: string
+                            example: "https://cdn.foodkitapp.io/brands/51/logo_image_src.100x100.jpg"
+                          locales:
+                            type: object
+                            properties:
+                              en:
+                                type: object
+                                properties:
+                                  name: 
+                                    type: string
+                                    example: "McDonald's"
+                              th:
+                                type: object
+                                properties:
+                                  name: 
+                                    type: string
+                                    example: "โดนัลด์"
+                      branch:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            minimum: 1
+                            example: 422
+                          locales:
+                            type: object
+                            properties:
+                              en:
+                                type: object
+                                properties:
+                                  name: 
+                                    type: string
+                                    example: "McDonald's King Street"
+                                  short_name:
+                                    type: string
+                                    example: "King Street"
+                              th:
+                                type: object
+                                properties:
+                                  name: 
+                                    type: string
+                                    example: "โดนัลด์ ถนนพระราชา"
+                                  short_name:
+                                    type: string
+                                    example: "ถนนพระราชา"
+                      customer:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            minimum: 1
+                            example: 10891
+                          name:
+                            type: string
+                            example: "James Smith"
+                      order:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            minimum: 1
+                            example: 890121
+                          reference:
+                            type: string
+                            example: "S01-190100023"
+                          type:
+                            type: string
+                            example: "delivery"
+                          is_realtime:
+                            type: boolean
+                            example: true
+                          scheduled_for:
+                            type: string
+                            example: null
+                      line_items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 101
+                            before_sale_price:
+                              type: float
+                              example: 0
+                            extra_items:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  price:
+                                    type: float
+                                    example: 10
+                                  locales:
+                                    type: object
+                                    properties:
+                                      en:
+                                        type: object
+                                        properties:
+                                          name:
+                                            type: string
+                                            example: "Ketchup"
+                                      th:
+                                        type: object
+                                        properties:
+                                          name: 
+                                            type: string
+                                            example: "ซอสมะเขือเทศ"
+                            price:
+                              type: float
+                              example: 100
+                            quantity:
+                              type: integer
+                              minimum: 1
+                              example: 2
+                            locales:
+                              type: object
+                              properties:
+                                en:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                      example: "Hamurbger"
+                                th:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                      example: "แฮมเบอร์เกอร์"
+                      totals:
+                        type: object
+                        properties:
+                          discount:
+                            type: float
+                            example: 20
+                          discount_percentage:
+                            type: float
+                            example: 0
+                          coupon_discount:
+                            type: float
+                            example: 0
+                          delivery_fee:
+                            type: float
+                            example: 50
+                          payment_fee:
+                            type: float
+                            example: 0
+                          payment_fee_type:
+                            type: string
+                            example: "none"
+                          payment_fee_amount:
+                            type: float
+                            example: 0
+                          payment_fee_percentage:
+                            type: float
+                            example: null
+                          payment_fee_fixed:
+                            type: float
+                            example: null
+                          service_fee:
+                            type: float
+                            example: 0
+                          service_fee_percentage:
+                            type: float
+                            example: 0
+                          subtotal:
+                            type: float
+                            example: 165
+                          excluded_taxes:
+                            type: float
+                            example: 0
+                          taxable_amount:
+                            type: float
+                            example: 0
+                          tax_mode:
+                            type: string
+                            example: "inclusive"
+                          vat:
+                            type: float
+                            example: 12.76
+                          vat_percentage:
+                            type: float
+                            example: 7
+                          total:
+                            type: float
+                            example: 195
+                          rounding:
+                            type: float
+                            example: 0
+                          manual_price_adjustment:
+                            type: float
+                            example: 0
+                          manual_price_adjustment_reason:
+                            type: float
+                            example: null
+                      payment_gateway:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: "Omise"
+                          configuration:
+                            type: string
+                            example: "public_key=pkey_test_57wp8inyzr6ub4miwiq"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Bearer {token}
