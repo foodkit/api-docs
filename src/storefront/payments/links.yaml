@@ -26,8 +26,6 @@ paths:
       summary: Retrieve a payment link
       description: If the payment link token is valid the endpoint will return the necessary information for the payment link client to proceed with capturing payment information (e.g credit card details) from the consumer.
       responses:
-        '403':
-          $ref: '../../shared/components.responses.yaml#/Unauthorized'
         '404':
           $ref: '../../shared/components.responses.yaml#/NotFound'
         '400':
