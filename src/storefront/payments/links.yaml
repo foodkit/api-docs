@@ -44,6 +44,7 @@ paths:
                     enum:
                       - expired
                       - not_found
+                      - paid
                     example: "expired"
                   brand:
                     type: object
