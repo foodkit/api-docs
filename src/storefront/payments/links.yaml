@@ -95,9 +95,6 @@ paths:
                             type: integer
                             minimum: 1
                             example: 422
-                          timezone:
-                            type: string
-                            example: 'Asia/Bangkok'
                           locales:
                             type: object
                             properties:
@@ -150,9 +147,13 @@ paths:
                           is_realtime:
                             type: boolean
                             example: true
-                          scheduled_for:
+                          scheduled_date:
                             type: string
-                            example: null
+                            example: '2019-01-22'
+                            nullable: true
+                          scheduled_time:
+                            type: string
+                            example: '17:00'
                             nullable: true
                       line_items:
                         type: array
