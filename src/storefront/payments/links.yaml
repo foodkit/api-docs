@@ -59,21 +59,9 @@ paths:
                       customer_service_phone_number:
                         type: string
                         example: '8020202020'
-                      locales:
-                        type: object
-                        properties:
-                          en:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                                example: "McDonald's"
-                          th:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                                example: "โดนัลด์"
+                      name:
+                        type: string
+                        example: "McDonald's"
         '200':
           description: Payment link request information.
           headers:
