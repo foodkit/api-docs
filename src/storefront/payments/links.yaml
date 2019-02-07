@@ -178,8 +178,9 @@ paths:
                               type: integer
                               example: 101
                             before_sale_price:
-                              type: float
-                              example: 0
+                              type: number
+                              format: float
+                              example: 0.0
                             extra_items:
                               type: array
                               items:
@@ -188,7 +189,8 @@ paths:
                                   id:
                                     type: integer
                                   price:
-                                    type: float
+                                    type: number
+                                    format: float
                                     example: 10
                                   locales:
                                     type: object
@@ -206,7 +208,8 @@ paths:
                                             type: string
                                             example: "ซอสมะเขือเทศ"
                             price:
-                              type: float
+                              type: number
+                              format: float
                               example: 100
                             quantity:
                               type: integer
@@ -231,67 +234,86 @@ paths:
                         type: object
                         properties:
                           discount:
-                            type: float
+                            type: number
+                            format: float
                             example: 20
                           discount_percentage:
-                            type: float
+                            type: number
+                            format: float
                             example: 0
                           coupon_discount:
-                            type: float
+                            type: number
+                            format: float
                             example: 0
                           delivery_fee:
-                            type: float
+                            type: number
+                            format: float
                             example: 50
                           payment_fee:
-                            type: float
+                            type: number
+                            format: float
                             example: 0
                           payment_fee_type:
                             type: string
                             example: "none"
                           payment_fee_amount:
-                            type: float
+                            type: number
+                            format: float
                             example: 0
                           payment_fee_percentage:
-                            type: float
+                            type: number
+                            format: float
                             example: null
                           payment_fee_fixed:
-                            type: float
+                            type: number
+                            format: float
                             example: null
                           service_fee:
-                            type: float
+                            type: number
+                            format: float
                             example: 0
                           service_fee_percentage:
-                            type: float
+                            type: number
+                            format: float
                             example: 0
                           subtotal:
-                            type: float
+                            type: number
+                            format: float
                             example: 165
                           excluded_taxes:
-                            type: float
+                            type: number
+                            format: float
                             example: 0
                           taxable_amount:
-                            type: float
+                            type: number
+                            format: float
                             example: 0
                           tax_mode:
                             type: string
                             example: "inclusive"
                           vat:
-                            type: float
+                            type: number
+                            format: float
                             example: 12.76
                           vat_percentage:
-                            type: float
+                            type: number
+                            format: float
                             example: 7
                           total:
-                            type: float
+                            type: number
+                            format: float
                             example: 195
                           rounding:
-                            type: float
+                            type: number
+                            format: float
                             example: 0
                           manual_price_adjustment:
-                            type: float
+                            type: number
+                            format: float
                             example: 0
                           manual_price_adjustment_reason:
-                            type: float
+                            type: number
+                            format: float
                             example: null
                       payment_gateway:
                         type: object
