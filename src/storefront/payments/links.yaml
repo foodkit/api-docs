@@ -238,6 +238,10 @@ paths:
                             example: 0
                           payment_fee_type:
                             type: string
+                            enum:
+                              - none
+                              - absolute
+                              - percentage
                             example: "none"
                           payment_fee_amount:
                             type: number
