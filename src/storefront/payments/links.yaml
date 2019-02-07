@@ -97,21 +97,9 @@ paths:
                           logo_image_src:
                             type: string
                             example: "https://cdn.foodkitapp.io/brands/51/logo_image_src.100x100.jpg"
-                          locales:
-                            type: object
-                            properties:
-                              en:
-                                type: object
-                                properties:
-                                  name: 
-                                    type: string
-                                    example: "McDonald's"
-                              th:
-                                type: object
-                                properties:
-                                  name: 
-                                    type: string
-                                    example: "โดนัลด์"
+                          name:
+                            type: string
+                            example: "McDonald's"
                       branch:
                         type: object
                         properties:
@@ -128,18 +116,22 @@ paths:
                                   name: 
                                     type: string
                                     example: "McDonald's King Street"
+                                    nullable: true
                                   short_name:
                                     type: string
                                     example: "King Street"
+                                    nullable: true
                               th:
                                 type: object
                                 properties:
                                   name: 
                                     type: string
                                     example: "โดนัลด์ ถนนพระราชา"
+                                    nullable: true
                                   short_name:
                                     type: string
                                     example: "ถนนพระราชา"
+                                    nullable: true
                       customer:
                         type: object
                         properties:
@@ -150,6 +142,7 @@ paths:
                           name:
                             type: string
                             example: "James Smith"
+                            nullable: true
                       order:
                         type: object
                         properties:
@@ -169,6 +162,7 @@ paths:
                           scheduled_for:
                             type: string
                             example: null
+                            nullable: true
                       line_items:
                         type: array
                         items:
@@ -181,6 +175,7 @@ paths:
                               type: number
                               format: float
                               example: 0.0
+                              nullable: true
                             extra_items:
                               type: array
                               items:
@@ -194,19 +189,19 @@ paths:
                                     example: 10
                                   locales:
                                     type: object
-                                    properties:
+                                    additionalProperties:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                          nullable: true
+                                        description:
+                                          type: string
+                                          nullable: true
+                                    example:
                                       en:
-                                        type: object
-                                        properties:
-                                          name:
-                                            type: string
-                                            example: "Ketchup"
-                                      th:
-                                        type: object
-                                        properties:
-                                          name: 
-                                            type: string
-                                            example: "ซอสมะเขือเทศ"
+                                        name: "Ketchup"
+                                        description: "Tomato sauce"
                             price:
                               type: number
                               format: float
@@ -217,19 +212,15 @@ paths:
                               example: 2
                             locales:
                               type: object
-                              properties:
+                              additionalProperties:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                    nullable: true
+                              example:
                                 en:
-                                  type: object
-                                  properties:
-                                    name:
-                                      type: string
-                                      example: "Hamurbger"
-                                th:
-                                  type: object
-                                  properties:
-                                    name:
-                                      type: string
-                                      example: "แฮมเบอร์เกอร์"
+                                  name: "Hamburger"
                       totals:
                         type: object
                         properties:
