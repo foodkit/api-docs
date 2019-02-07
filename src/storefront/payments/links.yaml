@@ -95,6 +95,9 @@ paths:
                             type: integer
                             minimum: 1
                             example: 422
+                          timezone:
+                            type: string
+                            example: 'Asia/Bangkok'
                           locales:
                             type: object
                             properties:
