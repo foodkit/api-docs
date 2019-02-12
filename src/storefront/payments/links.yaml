@@ -8,6 +8,66 @@ info:
     url: /
     email: corey@foodkit.io
 paths:
+  /api/v4/payments/brands/{brand}/links/{token}/payments/{gateway}:
+    parameters:
+      - $ref: '../../shared/components.parameters.yaml#/brand'
+      - in: path
+        name: token
+        required: true
+        schema:
+          type: string
+          minimum: 32
+        description: The unique "token" parameter that identifies the payment link. This is non-guessable and randomly generated.
+      - in: path
+        name: gateway
+        required: true
+        schema:
+          type: string
+          enum:
+            - omise
+        description: A payment gateway's name
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - 'Payments'
+      summary: Charge a customer for an order
+      description: If the payment link token is valid the endpoint will use the cardToken to make a charge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                card_token:
+                  type: string
+                  minimum: 1
+                  example: tkn_xxx_yyyy
+                  description: Provide a secure token which you need to acquire from the payment gateway in advance
+      responses:
+        '400':
+          description: Failed token lookup
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                $ref: 'components.schemas.yaml#/InvalidPaymentTokenResponse/schema'
+        '200':
+          description: Payment was successful
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    example: []
   /api/v4/payments/brands/{brand}/links/{token}:
     parameters:
       - $ref: '../../shared/components.parameters.yaml#/brand'
@@ -36,32 +96,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    description: Explains what went wrong. Usually something is wrong with the token
-                    enum:
-                      - expired
-                      - not_found
-                      - paid
-                    example: "expired"
-                  brand:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        minimum: 1
-                        example: 52
-                      logo_image_src:
-                        type: string
-                        example: "https://cdn.foodkitapp.io/brands/51/logo_image_src.100x100.jpg"
-                      customer_service_phone_number:
-                        type: string
-                        example: '8020202020'
-                      name:
-                        type: string
-                        example: "McDonald's"
+                $ref: 'components.schemas.yaml#/InvalidPaymentTokenResponse/schema'
         '200':
           description: Payment link request information.
           headers:
