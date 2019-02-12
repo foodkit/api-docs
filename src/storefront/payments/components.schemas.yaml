@@ -1,0 +1,29 @@
+openapi: 3.0.2
+InvalidPaymentTokenResponse:
+  schema:
+    type: object
+    properties:
+      status:
+        type: string
+        description: Explains what went wrong. Usually something is wrong with the token
+        enum:
+          - expired
+          - not_found
+          - paid
+        example: "expired"
+      brand:
+        type: object
+        properties:
+          id:
+            type: integer
+            minimum: 1
+            example: 52
+          logo_image_src:
+            type: string
+            example: "https://cdn.foodkitapp.io/brands/51/logo_image_src.100x100.jpg"
+          customer_service_phone_number:
+            type: string
+            example: '8020202020'
+          name:
+            type: string
+            example: "McDonald's"
