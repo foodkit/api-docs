@@ -54,7 +54,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'components.schemas.yaml#/InvalidPaymentTokenResponse/schema'
+                allOf:
+                  - type: object
+                    properties:
+                      status:
+                        type: string
+                        description: Explains what went wrong. Usually something is wrong with the token
+                        enum:
+                          - expired
+                          - not_found
+                          - paid
+                          - invalid_card_details
+                          - insufficient_funds
+                          - payment_failed
+                        example: "expired"
+                  - $ref: 'components.schemas.yaml#/InvalidPaymentTokenResponse/schema'
         '200':
           description: Payment was successful
           headers:
