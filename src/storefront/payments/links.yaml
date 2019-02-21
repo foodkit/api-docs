@@ -134,6 +134,7 @@ paths:
                           logo_image_src:
                             type: string
                             example: "https://cdn.foodkitapp.io/brands/51/logo_image_src.100x100.jpg"
+                            nullable: true
                           name:
                             type: string
                             example: "McDonald's"
@@ -190,6 +191,7 @@ paths:
                           reference:
                             type: string
                             example: "S01-190100023"
+                            nullable: true
                           type:
                             type: string
                             example: "delivery"

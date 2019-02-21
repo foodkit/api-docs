@@ -21,9 +21,11 @@ InvalidPaymentTokenResponse:
           logo_image_src:
             type: string
             example: "https://cdn.foodkitapp.io/brands/51/logo_image_src.100x100.jpg"
+            nullable: true
           customer_service_phone_number:
             type: string
             example: '8020202020'
+            nullable: true
           name:
             type: string
             example: "McDonald's"

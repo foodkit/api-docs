@@ -68,18 +68,22 @@ Product:
           type: string
           format: url
           example: 'https://images.snpfood.com/image/upload/q_auto/v1/brands/15/inventory/products/4941'
+          nullable: true
         full_size:
           type: string
           format: url
           example: 'https://images.snpfood.com/image/upload/q_auto/v1/brands/15/inventory/products/4941'
+          nullable: true
         thumbnail:
           type: string
           format: url
           example: 'https://images.snpfood.com/image/upload/q_auto/v1/brands/15/inventory/products/4941'
+          nullable: true
         thumbnail_retina:
           type: string
           format: url
           example: 'https://images.snpfood.com/image/upload/q_auto/v1/brands/15/inventory/products/4941'
+          nullable: true
     extras:
       type: array
       items:
@@ -125,14 +129,17 @@ Product:
     cart_limit:
       type: integer
       minimum: 0
+      nullable: true
       description: Max amount of this products allowed to add. 0 - means no limit.
     published_at:
       type: string
       format: timestamp
+      nullable: true
       description: When a product should appear to a customer
     unpublished_at:
       type: string
       format: timestamp
+      nullable: true
       description: When a product should disappear from a customer's menu
     is_published_on_web:
       type: boolean
@@ -149,6 +156,7 @@ Product:
     minimum_preorder_days:
       type: integer
       minimum: 0
+      nullable: true
       description: The number of days in advance a restaurant needs to deliver/cook
     tags:
       type: array
