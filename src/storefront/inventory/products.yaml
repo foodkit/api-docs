@@ -25,6 +25,12 @@ paths:
           schema:
             type: integer
             minimum: 1
+        - name: published_after
+          in: query
+          description: this will only shows products which are visible to customers AFTER the date
+          schema:
+            type: date
+          example: "2018-07-01"
       responses:
         '403':
           $ref: '../../shared/components.responses.yaml#/Unauthorized'
