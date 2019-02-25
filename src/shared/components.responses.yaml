@@ -26,3 +26,12 @@ Unauthorized:
     application/json:
       schema:
         $ref: 'components.schemas.yaml#/Error'
+NotFound:
+  description: The requested resource does not exist.
+  headers:
+    X-Response-Id:
+      $ref: 'components.headers.yaml#/xResponseId'
+  content:
+    application/json:
+      schema:
+        $ref: 'components.schemas.yaml#/NotFound'

@@ -18,6 +18,7 @@ paths:
         - 'Get dashboard alerts'
       operationId: admin.brands.alert
       parameters:
+        - $ref: '../../shared/components.parameters.yaml#/brand'
         - name: type
           in: query
           schema:
@@ -34,25 +35,28 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    type:
-                      type: string
-                      example: main
-                    title:
-                      type: string
-                      example: New Dashboard Available
-                    description:
-                      type: string
-                    link_text:
-                      type: string
-                    link_url:
-                      type: string
-                    image:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
                       type: object
                       properties:
-                        hero:
+                        type:
                           type: string
-                          format: url
+                          example: main
+                        title:
+                          type: string
+                          example: New Dashboard Available
+                        description:
+                          type: string
+                        link_text:
+                          type: string
+                        link_url:
+                          type: string
+                        image:
+                          type: object
+                          properties:
+                            hero:
+                              type: string
+                              format: url

@@ -83,13 +83,13 @@ class MergeCommand extends Command
      */
     private function getReferencesFromGivenInputSpec($specPath, OutputInterface $output): array
     {
-        $output->writeln("🗄  Read References From The Spec");
+        $output->writeln("🗄  Read References From The Spec: $specPath");
 
         $files = [];
 
         $specRealPath = realpath($specPath);
         if (!$specRealPath && !is_readable($specRealPath)) {
-            throw new \Exception("Input spec is not available");
+            throw new \Exception("Input spec is not available: $specRealPath");
         }
         $specBasePath = dirname($specRealPath);
 
@@ -104,7 +104,13 @@ class MergeCommand extends Command
             foreach ($specJSON['paths'] as $path) {
                 if (isset($path['$ref'])) {
 
-                    $referencedFile = realpath($specBasePath . "/" . $path['$ref']);
+                    # resolve relative path (if any)
+                    if($path['$ref'][0] != "/") {
+                        $referencedFile = realpath($specBasePath . "/" . $path['$ref']);
+                    } else {
+                        $referencedFile = $path['$ref'];
+                    }
+
                     if (!$referencedFile || !is_readable($referencedFile)) {
                         throw new \Exception("$referencedFile is not available");
                     } else {

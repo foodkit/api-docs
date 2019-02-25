@@ -15,6 +15,7 @@
 ```
 
 ## Validate
+To be sure that the produced specification is valid, you can quickly run this command:
 
 ```
 ./node_modules/.bin/swagger-cli validate src/...yourfile.yaml

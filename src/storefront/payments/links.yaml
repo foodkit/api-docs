@@ -1,0 +1,370 @@
+openapi: 3.0.2
+info:
+  title: Payment links API
+  description: Payment links provide a mechanism for securely capturing credit card information from customers when an (unpaid) order has already been created. The customer will use the link to complete the payment, updating the order status to "paid."
+  version: 0.0.1
+  contact:
+    name: Corey Mcmahon
+    url: /
+    email: corey@foodkit.io
+paths:
+  /api/v4/payments/brands/{brand}/links/{token}/payments/{gateway}:
+    parameters:
+      - $ref: '../../shared/components.parameters.yaml#/brand'
+      - in: path
+        name: token
+        required: true
+        schema:
+          type: string
+          minimum: 32
+        description: The unique "token" parameter that identifies the payment link. This is non-guessable and randomly generated.
+      - in: path
+        name: gateway
+        required: true
+        schema:
+          type: string
+          enum:
+            - omise
+        description: A payment gateway's name
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - 'Payments'
+      summary: Charge a customer for an order
+      description: If the payment link token is valid the endpoint will use the cardToken to make a charge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                card_token:
+                  type: string
+                  minimum: 1
+                  example: tkn_xxx_yyyy
+                  description: Provide a secure token which you need to acquire from the payment gateway in advance
+      responses:
+        '400':
+          description: Failed token lookup
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      status:
+                        type: string
+                        description: Explains what went wrong. Usually something is wrong with the token
+                        enum:
+                          - expired
+                          - not_found
+                          - paid
+                          - invalid_card_details
+                          - insufficient_funds
+                          - payment_failed
+                        example: "expired"
+                  - $ref: 'components.schemas.yaml#/InvalidPaymentTokenResponse/schema'
+        '200':
+          description: Payment was successful
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    example: []
+  /api/v4/payments/brands/{brand}/links/{token}:
+    parameters:
+      - $ref: '../../shared/components.parameters.yaml#/brand'
+      - in: path
+        name: token
+        required: true
+        schema:
+          type: string
+          minimum: 32
+        description: The unique "token" parameter that identifies the payment link. This is non-guessable and randomly generated.
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - 'Payments'
+      summary: Retrieve a payment link
+      description: If the payment link token is valid the endpoint will return the necessary information for the payment link client to proceed with capturing payment information (e.g credit card details) from the consumer.
+      responses:
+        '404':
+          $ref: '../../shared/components.responses.yaml#/NotFound'
+        '400':
+          description: Failed token lookup
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                $ref: 'components.schemas.yaml#/InvalidPaymentTokenResponse/schema'
+        '200':
+          description: Payment link request information.
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      brand:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            minimum: 1
+                            example: 52
+                          logo_image_src:
+                            type: string
+                            example: "https://cdn.foodkitapp.io/brands/51/logo_image_src.100x100.jpg"
+                            nullable: true
+                          name:
+                            type: string
+                            example: "McDonald's"
+                      branch:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            minimum: 1
+                            example: 422
+                          locales:
+                            type: object
+                            properties:
+                              en:
+                                type: object
+                                properties:
+                                  name: 
+                                    type: string
+                                    example: "McDonald's King Street"
+                                    nullable: true
+                                  short_name:
+                                    type: string
+                                    example: "King Street"
+                                    nullable: true
+                              th:
+                                type: object
+                                properties:
+                                  name: 
+                                    type: string
+                                    example: "โดนัลด์ ถนนพระราชา"
+                                    nullable: true
+                                  short_name:
+                                    type: string
+                                    example: "ถนนพระราชา"
+                                    nullable: true
+                      customer:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            minimum: 1
+                            example: 10891
+                          name:
+                            type: string
+                            example: "James Smith"
+                            nullable: true
+                      order:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            minimum: 1
+                            example: 890121
+                          reference:
+                            type: string
+                            example: "S01-190100023"
+                            nullable: true
+                          type:
+                            type: string
+                            example: "delivery"
+                          is_realtime:
+                            type: boolean
+                            example: true
+                          scheduled_date:
+                            type: string
+                            example: '2019-01-22'
+                            nullable: true
+                          scheduled_time:
+                            type: string
+                            example: '17:00'
+                            nullable: true
+                      line_items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 101
+                            before_sale_price:
+                              type: number
+                              format: float
+                              example: 0.0
+                              nullable: true
+                            extra_items:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  price:
+                                    type: number
+                                    format: float
+                                    example: 10
+                                  locales:
+                                    type: object
+                                    additionalProperties:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                          nullable: true
+                                        description:
+                                          type: string
+                                          nullable: true
+                                    example:
+                                      en:
+                                        name: "Ketchup"
+                                        description: "Tomato sauce"
+                            price:
+                              type: number
+                              format: float
+                              example: 100
+                            quantity:
+                              type: integer
+                              minimum: 1
+                              example: 2
+                            locales:
+                              type: object
+                              additionalProperties:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                    nullable: true
+                              example:
+                                en:
+                                  name: "Hamburger"
+                      totals:
+                        type: object
+                        properties:
+                          discount:
+                            type: number
+                            format: float
+                            example: 20
+                          discount_percentage:
+                            type: number
+                            format: float
+                            example: 0
+                          coupon_discount:
+                            type: number
+                            format: float
+                            example: 0
+                          delivery_fee:
+                            type: number
+                            format: float
+                            example: 50
+                          payment_fee:
+                            type: number
+                            format: float
+                            example: 0
+                          payment_fee_type:
+                            type: string
+                            enum:
+                              - none
+                              - absolute
+                              - percentage
+                            example: "none"
+                          payment_fee_amount:
+                            type: number
+                            format: float
+                            example: 0
+                          payment_fee_percentage:
+                            type: number
+                            format: float
+                            example: null
+                          payment_fee_fixed:
+                            type: number
+                            format: float
+                            example: null
+                          service_fee:
+                            type: number
+                            format: float
+                            example: 0
+                          service_fee_percentage:
+                            type: number
+                            format: float
+                            example: 0
+                          subtotal:
+                            type: number
+                            format: float
+                            example: 165
+                          excluded_taxes:
+                            type: number
+                            format: float
+                            example: 0
+                          taxable_amount:
+                            type: number
+                            format: float
+                            example: 0
+                          tax_mode:
+                            type: string
+                            example: "inclusive"
+                          vat:
+                            type: number
+                            format: float
+                            example: 12.76
+                          vat_percentage:
+                            type: number
+                            format: float
+                            example: 7
+                          total:
+                            type: number
+                            format: float
+                            example: 195
+                          rounding:
+                            type: number
+                            format: float
+                            example: 0
+                          manual_price_adjustment:
+                            type: number
+                            format: float
+                            example: 0
+                          manual_price_adjustment_reason:
+                            type: number
+                            format: float
+                            example: null
+                      payment_gateway:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: "Omise"
+                          configuration:
+                            type: string
+                            example: "public_key=pkey_test_57wp8inyzr6ub4miwiq"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Bearer {token}
