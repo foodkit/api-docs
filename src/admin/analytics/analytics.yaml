@@ -110,16 +110,11 @@ paths:
           $ref: '../../shared/components.responses.yaml#/Unauthorized'
         '500':
           $ref: '../../shared/components.responses.yaml#/RuntimeFailure'
-        200:
-          description: Report generation requests received
+        204:
+          description: Report generation requests accepted
           headers:
             X-Response-Id:
               $ref: '../../shared/components.headers.yaml#/xResponseId'
-          content:
-            application/json:
-              schema:
-                type: string
-              example: ''
 components:
   securitySchemes:
     bearerAuth:
