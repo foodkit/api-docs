@@ -35,6 +35,12 @@ paths:
             type: date
           example: "2018-07-31"
           description: Note that this date should not be further than 31 days from the start_date
+        - name: vendor_ids
+          in: query
+          schema:
+            type: string
+          example: "470,471"
+          description: Note that this date should not be further than 31 days from the start_date
       responses:
         '403':
           $ref: '../../shared/components.responses.yaml#/Unauthorized'
@@ -74,7 +80,7 @@ paths:
                   type: date
                   example: "2018-07-31"
                   description: Note that this date should not be further than 31 days from the start_date
-                branch:
+                vendor_ids:
                   description: Ids of branches to include to the report
                   type: array
                   items:
