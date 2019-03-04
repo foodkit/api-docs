@@ -1,0 +1,122 @@
+openapi: 3.0.2
+info:
+  title: Sample API spec for Admin analytics
+  version: 0.0.1
+  contact:
+    name: Dmitry Lezhnev
+    url: /
+    email: dmitry@foodkit.io
+  x-logo:
+    url: "https://static.wixstatic.com/media/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.png/v1/fill/w_294,h_110,al_c,q_80,usm_0.66_1.00_0.01/2b68c3_9d457ab2b14e46b3979946b58ff87120~mv2.webp"
+    backgroundColor: "#FFFFFF"
+    altText: "Foodkit logo"
+paths:
+  /api/v4/admin/analytics/brands/{brand}/report/sales:
+    parameters:
+      - $ref: '../../shared/components.parameters.yaml#/brand'
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - 'Admin analytics'
+      summary: Build a sales report
+      description: As a result of this request the email with a link to the generated report will be sent.
+      parameters:
+        - name: start_date
+          in: query
+          required: true
+          schema:
+            type: date
+          example: "2018-07-01"
+        - name: end_date
+          in: query
+          required: true
+          schema:
+            type: date
+          example: "2018-07-31"
+          description: Note that this date should not be further than 31 days from the start_date
+      responses:
+        '403':
+          $ref: '../../shared/components.responses.yaml#/Unauthorized'
+        '500':
+          $ref: '../../shared/components.responses.yaml#/RuntimeFailure'
+        200:
+          description: Report generation requests received
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ''
+  /api/v4/admin/analytics/brands/{brand}/report/sku-sales:
+    parameters:
+      - $ref: '../../shared/components.parameters.yaml#/brand'
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - 'Admin analytics'
+      summary: Build a sales report with sku details.
+      description: As a result of this request the email with a link to the generated report will be sent.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_date:
+                  type: date
+                  example: "2018-07-31"
+                end_date:
+                  type: date
+                  example: "2018-07-31"
+                  description: Note that this date should not be further than 31 days from the start_date
+                branch:
+                  description: Ids of branches to include to the report
+                  type: array
+                  items:
+                    type: integer
+                  example: [30,31]
+                category:
+                  description: Ids of categories to include to the report
+                  type: array
+                  items:
+                    type: integer
+                  example: []
+                tags:
+                  description: Ids of tags to include to the report
+                  type: array
+                  items:
+                    type: integer
+                  example: [15,16]
+                tax:
+                  description: Which customers to include to the report
+                  type: string
+                  enum:
+                    - all
+                    - corporate
+                    - individual
+      responses:
+        '403':
+          $ref: '../../shared/components.responses.yaml#/Unauthorized'
+        '500':
+          $ref: '../../shared/components.responses.yaml#/RuntimeFailure'
+        200:
+          description: Report generation requests received
+          headers:
+            X-Response-Id:
+              $ref: '../../shared/components.headers.yaml#/xResponseId'
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ''
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: string
