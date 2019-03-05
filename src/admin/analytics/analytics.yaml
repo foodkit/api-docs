@@ -73,6 +73,13 @@ paths:
             schema:
               type: object
               properties:
+                lang:
+                  type: string
+                  enum:
+                    - en
+                    - th
+                  description: The language to use for the report
+                  example: 'en'
                 start_date:
                   type: date
                   example: "2018-07-31"
