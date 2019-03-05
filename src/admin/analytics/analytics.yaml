@@ -80,6 +80,11 @@ paths:
                     - th
                   description: The language to use for the report
                   example: 'en'
+                plu_range:
+                  type: string
+                  pattern: '^\d+-\d+$'
+                  example: '1000-2400'
+                  description: A range of PLUs to include to the report
                 start_date:
                   type: date
                   example: "2018-07-31"
