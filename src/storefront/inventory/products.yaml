@@ -25,6 +25,16 @@ paths:
           schema:
             type: integer
             minimum: 1
+            maximum: 10000
+            default: 1
+        - name: limit
+          in: query
+          description: set the length of the response
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 25
         - name: published_after
           in: query
           description: this will only shows products which are visible to customers AFTER the date
